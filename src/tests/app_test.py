@@ -1,6 +1,7 @@
 import unittest
 from app import CommandLineUI
 from entities.book import Book
+from unittest.mock import Mock
 
 class StubIO:
     def __init__(self, inputs):
@@ -30,3 +31,10 @@ class TestCommandLineUI(unittest.TestCase):
         self.app.start_app()
 
         self.assertEqual(len(self.app._references), 1)
+
+    def test_user_input_not_in_options_works(self):
+        io = StubIO(["käpistely", "poistu"])
+        self.app = CommandLineUI(io)
+        self.app.start_app()
+
+        self.assertEqual(io.outputs[1], "Virheellinen syöte.")
