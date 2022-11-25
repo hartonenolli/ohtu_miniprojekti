@@ -6,5 +6,4 @@ class Book:
         self._year = year
 
     def __str__(self):
-        return "ok"
-        #tee tähän nätti printti
+        return f"{self._author}, {self._title}. {self._publisher}, {self._year}."
