@@ -23,3 +23,10 @@ class TestCommandLineUI(unittest.TestCase):
         self.app.start_app()
         
         self.assertEqual(self.app._run, False)
+
+    def test_user_input_add_reference_works(self):
+        io = StubIO(["lisää viite", "kirja", "1", "2", "3", "4", "poistu"])
+        self.app = CommandLineUI(io)
+        self.app.start_app()
+
+        self.assertEqual(len(self.app._references), 1)
