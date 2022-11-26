@@ -4,7 +4,6 @@ version = "0.1.0"
 description = ""
 authors = ["Nana Reinikainen <nana.reinikainen@helsinki.fi>"]
 readme = "README.md"
-packages = [{include = "ohtu_miniprojekti"}]
 
 [tool.poetry.dependencies]
 python = "^3.8"
