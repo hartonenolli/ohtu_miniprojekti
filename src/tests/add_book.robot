@@ -1,6 +1,5 @@
 *** Settings ***
 Resource  resource.robot
-#Test Setup  Add Book And Input
 
 *** Test Cases ***
 Add One Book
@@ -9,10 +8,8 @@ Add One Book
     Run App
     Output Should Contain  Lisätään kirja Kivakirja (2011), kirjoittanut Kalle Kirjailija, julkaissut Kaverijulkaisu
 
-
-
-
-
-#*** Keywords ***
-#Add Book And Input
-#    Add Book  Kivakirja  Kalle Kirjailija  2011  Kaverijulkaisu
+Add Wrong Line
+    Input  abc
+    Input  poistu
+    Run App
+    output Should Contain  Virheellinen syöte.
