@@ -6,7 +6,9 @@ class StubIO:
         self.outputs = []
 
     def read(self, prompt):
-        return self.inputs.pop(0)
+        if len(self.inputs) > 0:
+            return self.inputs.pop(0)
+        return ""
     
     def write(self, prompt):
         self.outputs.append(prompt)
@@ -16,13 +18,13 @@ class StubIO:
 
 class AppLibrary:
     def __init__(self):
-        self._app = CommandLineUI()
         self._io = StubIO()
+        self._app = CommandLineUI(self._io)
 
     def input(self, value):
         self._io.add_input(value)
 
-    def start_app(self):
+    def run_app(self):
         self._app.start_app()
 
     def output_should_contain(self, value):

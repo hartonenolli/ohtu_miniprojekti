@@ -4,8 +4,9 @@ Resource  resource.robot
 
 *** Test Cases ***
 Add One Book
-    Input Start App  lisää viite
-    Add reference  Kivakirja  Kalle Kirjailija  2011  Kaverijulkaisu
+    Input Start App
+    Add reference  kirja  Kivakirja  Kalle Kirjailija  2011  Kaverijulkaisu
+    Run App
     Output Should Contain  Kalle Kirjailija, Kivakirja. Kaverijulkaisu, 2011.
 
 
