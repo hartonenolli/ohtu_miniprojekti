@@ -24,3 +24,7 @@ class AppLibrary:
 
     def start_app(self):
         self._app.start_app()
+
+    def output_should_contain(self, value):
+        if not value in self._io.outputs:
+            raise AssertionError(f"Output \"{value}\" is not in {str(self._io.outputs)}")
