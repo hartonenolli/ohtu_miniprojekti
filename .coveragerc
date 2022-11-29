@@ -1,3 +1,3 @@
 [run]
 source = src
-omit = src/tests/**,src/AppLibrary.py
+omit = src/tests/**,src/AppLibrary.py,src/index.py,src/reader_writer.py
