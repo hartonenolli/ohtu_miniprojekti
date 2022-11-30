@@ -10,8 +10,10 @@
   * siinä oli tehdyt storyt hyvässä muodossa.
   * User story issuet -> mihin sprintteiin kuuluu
   * Storyja ei priorisoituja ??
-  * Uusi estimaatti tabi ?
-  * Uusi sprintti tabi ?
+
+  * Parannusehdotuksia
+    - Uusi estimaatti tabi ?
+    - Uusi sprintti tabi ?
  
 ### Sprint 1 backlog
   * Task voi closata kun on merkitty doneksi
@@ -36,11 +38,11 @@
 ### Työtä tasaisesti
   * Hyvä burndown ja kommentti perusteella
  
-###  README.mD
+### README.md
   * Hyvä linkkipohjainen
   * Badget hyvät
   
-###  DOD
+### DOD
   * kondiksessa
  
 ### Asennus käyttö
@@ -64,22 +66,22 @@
  * Bibtex muodossa lukea
  * Bibtex muodossa lisätä
  * UI hommaa
-  * Komentorivi hommaan semomsen systeemin että kun kirjoittaa jotain sinne tai kun antaa ekan kysymyksen sit ku sä kirjotat vastauksen se clearaa terminaalin ja pysyy selkeenä
-  * clear komento ? automaattinen ?
-  * Valkkaa ?
+    - Komentorivi hommaan semomsen systeemin että kun kirjoittaa jotain sinne tai kun antaa ekan kysymyksen sit ku sä kirjotat vastauksen se clearaa terminaalin ja pysyy selkeenä
+    - clear komento ? automaattinen ?
+    - Valkkaa ?
   * Synkronointia käppänässä muodossa: muodostaa tiedoston ja jotenkin tekee sillain että siitä sais yhden tiedoston jonka vois lähettää / antaa tiedoston
 
 ## Nykyisestä 
  * Teknisestä kulmasta näyttää hyvältä
  * Backlogiin enemmän paukkuja
  * Taskeille päiväestimaatti
-   * Koko 
-   * Esim Elefantti extra large Kolibri Extra small esim tunneissa miten kaua kestää
+   - Koko 
+   - Esim Elefantti extra large Kolibri Extra small esim tunneissa miten kaua kestää
  * Sheets taskit ja päivittäinen estimaatti
 
 ## Retro
 
  * Flinga hyvä tapa
  * Muistiinpanot githubiin per retro
-   * Mitä läpi
-   * Huomattu oleellista
+   - Mitä läpi
+   - Huomattu oleellista
