@@ -46,10 +46,10 @@ class CommandLineUI:
     def write_to_bib_file(self, data):
         if data[0] == "kirja":
             bibtex = f"""@book{{{data[5]},
-    author = {data[2]},
-    title = {data[1]},
-    year = {data[3]},
-    publisher = {data[4]}
+    author = {{{data[2]}}},
+    title = {{{data[1]}}},
+    year = {{{data[3]}}},
+    publisher = {{{data[4]}}}
 }}\n
 """
         else:
