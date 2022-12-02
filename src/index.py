@@ -1,9 +1,11 @@
 from app import CommandLineUI
 from reader_writer import ReaderWriter
+from services.reference_service import BibtexController
 
 def main():
     io = ReaderWriter()
-    ui = CommandLineUI(io)
+    bibcontroller = BibtexController()
+    ui = CommandLineUI(io, bibcontroller)
     ui.start_app()
 
 

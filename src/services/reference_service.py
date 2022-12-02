@@ -1,6 +1,7 @@
 import bibtexparser
 from bibtexparser.bwriter import BibTexWriter
 from bibtexparser.bibdatabase import BibDatabase
+from entities.book import Book
 
 class BibtexController():
     def __init__(self):
