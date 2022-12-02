@@ -26,7 +26,7 @@ class TestCommandLineUI(unittest.TestCase):
         self.assertEqual(self.app._run, False)
 
     def test_user_input_add_reference_works(self):
-        io = StubIO(["lisää viite", "kirja", "1", "2", "3", "4", "poistu"])
+        io = StubIO(["lisää viite", "kirja", "1", "2", "3", "4", "5", "poistu"])
         self.app = CommandLineUI(io)
         self.app.start_app()
 
@@ -40,14 +40,14 @@ class TestCommandLineUI(unittest.TestCase):
         self.assertEqual(io.outputs[1], "Virheellinen syöte.")
 
     def test_user_input_list_references_works(self):
-        io = StubIO(["lisää viite", "kirja", "Sinuhe Egyptiläinen", "Mika Waltari", "1945", "WSOY", "listaa viitteet", "poistu"])
+        io = StubIO(["lisää viite", "kirja", "Sinuhe Egyptiläinen", "Mika Waltari", "1945", "WSOY", "Waltari45", "listaa viitteet", "poistu"])
         self.app = CommandLineUI(io)
         self.app.start_app()
 
         self.assertEqual(io.outputs[-1].__str__(), self.book.__str__())
 
     def test_add_reference_adds_correct_string_to_database(self):
-        io = StubIO(["Sinuhe Egyptiläinen", "Mika Waltari", "1945", "WSOY"])
+        io = StubIO(["Sinuhe Egyptiläinen", "Mika Waltari", "1945", "WSOY", "Waltari45"])
         self.app = CommandLineUI(io)
         self.app._references.append("kirja")
         self.app.add_reference("kirja")
