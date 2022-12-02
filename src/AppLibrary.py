@@ -5,20 +5,21 @@ class StubIO:
         self.inputs = inputs or []
         self.outputs = []
 
-    def read(self, prompt):
+    def read(self):
         if len(self.inputs) > 0:
             return self.inputs.pop(0)
         return ""
-    
+
     def write(self, prompt):
         self.outputs.append(prompt)
 
     def add_input(self, value):
         self.inputs.append(value)
 
-class AppLibrary:
+class AppLibrary():
     def __init__(self):
         self._io = StubIO()
+        # täällä pitäisi olla alustettuna BibtexController
         self._app = CommandLineUI(self._io)
 
     def input(self, value):

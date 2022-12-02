@@ -3,7 +3,7 @@ from bibtexparser.bwriter import BibTexWriter
 from bibtexparser.bibdatabase import BibDatabase
 from entities.book import Book
 
-class BibtexController():
+class BibtexController:
     def __init__(self):
         pass
 
@@ -23,14 +23,14 @@ class BibtexController():
         writer = BibTexWriter()
         writer.indent = "    "
         try:
-            with open(file, "a") as bibfile:
+            with open(file, "a", encoding="utf-8") as bibfile:
                 bibfile.write(writer.write(bibtex))
             return True
         except:
             return False
 
     def read_from_bib_file(self,file):
-        with open(file) as bibtex_file:
+        with open(file, encoding="utf-8") as bibtex_file:
             bib_database = bibtexparser.load(bibtex_file)
         refs = []
         for entry in bib_database.entries:
