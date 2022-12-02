@@ -61,4 +61,5 @@ class CommandLineUI:
         with open("references.bib") as bibtex_file:
             bib_database = bibtexparser.load(bibtex_file)
         for entry in bib_database.entries:
-            self._io.write(f'{entry["author"]}, {entry["title"]}. {entry["publisher"]}, {entry["year"]}.')
+            book = Book(entry["author"], entry["title"], entry["publisher"], entry["year"])
+            self._io.write(book)
