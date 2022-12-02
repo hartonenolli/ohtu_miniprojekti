@@ -58,6 +58,7 @@ class CommandLineUI:
 
         with open("references.bib", "a") as bibfile:
             bibfile.write(bibtex)
+        self._io.write("BibTex tiedoston kirjoittaminen onnistui")
 
     def write_to_csv_file(self, data, reference):
         with open(f"{reference}.csv", "a", encoding="UTF8") as file:
