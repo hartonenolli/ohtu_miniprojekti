@@ -53,7 +53,7 @@ class CommandLineUI:
 }}\n
 """
         else:
-            print("BibTex tiedoston kirjoittaminen epäonnistui")
+            self._io.write("BibTex tiedoston kirjoittaminen epäonnistui")
             return
 
         with open("references.bib", "a") as bibfile:
