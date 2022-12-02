@@ -49,10 +49,11 @@ class CommandLineUI:
     author = {data[2]},
     title = {data[1]},
     year = {data[3]},
-    publisher = {data[4]},
+    publisher = {data[4]}
 }}\n
 """
         else:
+            print("BibTex tiedoston kirjoittaminen epäonnistui")
             return
 
         with open("references.bib", "a") as bibfile:
