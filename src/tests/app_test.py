@@ -51,6 +51,6 @@ class TestCommandLineUI(unittest.TestCase):
         self.app = CommandLineUI(io)
         self.app._references.append("kirja")
         self.app.add_reference("kirja")
-        self.app.read_from_csv_file()
+        self.app.read_from_bib_file()
 
         self.assertEqual(io.outputs[-1].__str__(), self.book.__str__())

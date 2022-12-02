@@ -1,3 +1,6 @@
+import bibtexparser
+from bibtexparser.bwriter import BibTexWriter
+from bibtexparser.bibdatabase import BibDatabase
 from entities.book import Book
 
 class CommandLineUI:
@@ -18,7 +21,7 @@ class CommandLineUI:
                 self.add_reference(reference)
 
             elif user_input == "listaa viitteet":
-                self.read_from_csv_file()
+                self.read_from_bib_file()
 
             elif user_input == "poistu":
                 self._run = False
@@ -38,37 +41,25 @@ class CommandLineUI:
         data = (reference, title, author, year, publisher, keyword)
         self.write_to_bib_file(data)
 
-        # poistetaan kun ei tarvita enää csv
-        data = f"{author};{title};{publisher};{year}\n"
-        self.write_to_csv_file(data, reference)
-        #
-
     def write_to_bib_file(self, data):
-        if data[0] == "kirja":
-            bibtex = f"""@book{{{data[5]},
-    author = {{{data[2]}}},
-    title = {{{data[1]}}},
-    year = {{{data[3]}}},
-    publisher = {{{data[4]}}}
-}}\n
-"""
-        else:
-            self._io.write("BibTex tiedoston kirjoittaminen epäonnistui")
-            return
+        db = BibDatabase()
+        db.entries = [
+            {"title": str(data[1]),
+            "author": str(data[2]),
+            "year": str(data[3]),
+            "publisher": str(data[4]),
+            "ID": str(data[5]),
+            "ENTRYTYPE": "book"}]
 
+        writer = BibTexWriter()
+        writer.indent = "    "
         with open("references.bib", "a") as bibfile:
-            bibfile.write(bibtex)
+            bibfile.write(writer.write(db))
         self._io.write("BibTex tiedoston kirjoittaminen onnistui")
 
-    def write_to_csv_file(self, data, reference):
-        with open(f"{reference}.csv", "a", encoding="UTF8") as file:
-            file.write(data)
-
-    def read_from_csv_file(self):
-        for reference in self._references:
-            with open(f"{reference}.csv", "r", encoding="UTF8") as file:
-                for line in file:
-                    line = line.replace("\n", "")
-                    parts = line.split(";")
-                    book = Book(parts[0], parts[1], parts[2], parts[3])
-                    self._io.write(book)
+    def read_from_bib_file(self):
+        with open("references.bib") as bibtex_file:
+            bib_database = bibtexparser.load(bibtex_file)
+        for entry in bib_database.entries:
+            book = Book(entry["author"], entry["title"], entry["publisher"], entry["year"])
+            self._io.write(book)
