@@ -1,3 +1,5 @@
+from bibtexparser.bwriter import BibTexWriter
+from bibtexparser.bibdatabase import BibDatabase
 from entities.book import Book
 
 class CommandLineUI:
@@ -44,20 +46,18 @@ class CommandLineUI:
         #
 
     def write_to_bib_file(self, data):
-        if data[0] == "kirja":
-            bibtex = f"""@book{{{data[5]},
-    author = {{{data[2]}}},
-    title = {{{data[1]}}},
-    year = {{{data[3]}}},
-    publisher = {{{data[4]}}}
-}}\n
-"""
-        else:
-            self._io.write("BibTex tiedoston kirjoittaminen epäonnistui")
-            return
+        db = BibDatabase()
+        db.entries = [
+            {"title": str(data[1]),
+            "author": str(data[2]),
+            "year": str(data[3]),
+            "publisher": str(data[4]),
+            "ID": str(data[5]),
+            "ENTRYTYPE": "book"}]
 
+        writer = BibTexWriter()
         with open("references.bib", "a") as bibfile:
-            bibfile.write(bibtex)
+            bibfile.write(writer.write(db))
         self._io.write("BibTex tiedoston kirjoittaminen onnistui")
 
     def write_to_csv_file(self, data, reference):
