@@ -1,5 +1,3 @@
-from bibtexparser.bwriter import BibTexWriter
-from bibtexparser.bibdatabase import BibDatabase
 from PyInquirer import prompt
 
 class CommandLineUI:
@@ -30,7 +28,7 @@ class CommandLineUI:
                 self.add_reference(reference['add input'])
 
             elif user_input['start input'] == "listaa viitteet":
-                referencelist = self._bibcontroller.read_from_bib_file()
+                referencelist = self._bibcontroller.read_from_bib_file("references.bib")
                 for reference in referencelist:
                     self._io.write(reference)
 
@@ -55,7 +53,7 @@ class CommandLineUI:
         self._io.write(f"Lisätään {reference} {title} ({year}), kirjoittanut {author}, julkaissut {publisher}, avainsanalla {keyword}")
 
         data = (reference, title, author, year, publisher, keyword)
-        if self._bibcontroller.write_to_bib_file(data):
+        if self._bibcontroller.write_to_bib_file(data,"references.bib"):
             self._io.write("BibTex tiedoston kirjoittaminen onnistui")
         else:
             self._io.write("BibTex tiedoston kirjoittaminen epäonnistui")
