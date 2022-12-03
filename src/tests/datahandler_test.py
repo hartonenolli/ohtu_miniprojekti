@@ -1,5 +1,7 @@
 import unittest 
 from unittest.mock import mock_open, patch
+from tempfile import NamedTemporaryFile
+from os import unlink
 from repositories.datahandler import BibtexHandler
 
 
@@ -34,3 +36,11 @@ class TestBibtexHandler(unittest.TestCase):
         with patch("builtins.open", read_mock):
             self.bibHandler.read_from_bib_file(read_mock)
         read_mock().read.assert_called()
+
+    def test_read_contents_correct(self):
+        test_file = NamedTemporaryFile(encoding="utf-8", mode="w+", delete=False)
+        self.bibHandler.write_to_bib_file(self.list_data, test_file.name)
+        read_result = self.bibHandler.read_from_bib_file(test_file.name)
+        self.assertEqual(read_result.entries[0], self.data)
+        unlink(test_file.name)
+        
