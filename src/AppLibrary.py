@@ -1,4 +1,4 @@
-from app import CommandLineUI
+from ui.app import CommandLineUI
 
 class StubIO:
     def __init__(self, inputs=None):
@@ -19,7 +19,8 @@ class StubIO:
 class AppLibrary():
     def __init__(self):
         self._io = StubIO()
-        # täällä pitäisi olla alustettuna BibtexController
+        # täällä pitäisi olla alustettuna BibtexHandler
+        # ja ReferenceService
         self._app = CommandLineUI(self._io)
 
     def input(self, value):

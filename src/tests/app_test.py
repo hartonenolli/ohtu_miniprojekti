@@ -1,5 +1,5 @@
 import unittest
-from app import CommandLineUI
+from ui.app import CommandLineUI
 from entities.book import Book
 from unittest.mock import Mock
 

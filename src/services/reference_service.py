@@ -1,39 +1,40 @@
-import bibtexparser
-from bibtexparser.bwriter import BibTexWriter
-from bibtexparser.bibdatabase import BibDatabase
 from entities.book import Book
 
-class BibtexController:
-    def __init__(self):
+class ReferenceServices:
+    def __init__(self, io, bibhandler):
+        self._io = io
+        self._bibhandler = bibhandler
+
+    def add_reference(self, reference):
+        self._io.write("Syötä viitteen tiedot:")
+        title = self._io.read("Kirjan nimi: ")
+        author = self._io.read("Kijailija: ")
+        while True:
+            try:
+                year = int(self._io.read("Julkaisuvuosi: "))
+                break
+            except ValueError:
+                self._io.write("Virheellinen syöte")
+        publisher = self._io.read("Julkaisija: ")
+        keyword = self._io.read("Avainsana, jolla haluat viitata teokseen: ")
+        self._io.write(f"Lisätään {reference} {title} ({year}), kirjoittanut {author}, julkaissut {publisher}, avainsanalla {keyword}")
+
+        data = (reference, title, author, year, publisher, keyword)
+        if self._bibhandler.write_to_bib_file(data,"references.bib"):
+            self._io.write("BibTex tiedoston kirjoittaminen onnistui")
+        else:
+            self._io.write("BibTex tiedoston kirjoittaminen epäonnistui")
+
+    def edit_reference(self, reference):
         pass
 
-    def _create_bibtex_format(self, data):
-        bibtex_entry = BibDatabase()
-        bibtex_entry.entries = [
-            {"title": str(data[1]),
-            "author": str(data[2]),
-            "year": str(data[3]),
-            "publisher": str(data[4]),
-            "ID": str(data[5]),
-            "ENTRYTYPE": "book"}]
-        return bibtex_entry
+    def delete_reference(self,reference):
+        pass
 
-    def write_to_bib_file(self, data, file):
-        bibtex = self._create_bibtex_format(data)
-        writer = BibTexWriter()
-        writer.indent = "    "
-        try:
-            with open(file, "a", encoding="utf-8") as bibfile:
-                bibfile.write(writer.write(bibtex))
-            return True
-        except:
-            return False
-
-    def read_from_bib_file(self,file):
-        with open(file, encoding="utf-8") as bibtex_file:
-            bib_database = bibtexparser.load(bibtex_file)
+    def list_references(self):
+        references = self._bibhandler.read_from_bib_file("references.bib")
         refs = []
-        for entry in bib_database.entries:
+        for entry in references.entries:
             book = Book(entry["author"], entry["title"], entry["publisher"], entry["year"])
             refs.append(book)
         return refs

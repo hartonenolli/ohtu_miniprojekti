@@ -1,11 +1,13 @@
-from app import CommandLineUI
-from reader_writer import ReaderWriter
-from services.reference_service import BibtexController
+from ui.app import CommandLineUI
+from ui.reader_writer import ReaderWriter
+from repositories.datahandler import BibtexHandler
+from services.reference_service import ReferenceServices
 
 def main():
     io = ReaderWriter()
-    bibcontroller = BibtexController()
-    ui = CommandLineUI(io, bibcontroller)
+    bibhandler = BibtexHandler()
+    ref_service = ReferenceServices(io, bibhandler)
+    ui = CommandLineUI(io, ref_service)
     ui.start_app()
 
 
