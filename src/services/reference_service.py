@@ -17,8 +17,8 @@ class ReferenceServices:
                 self._io.write("Virheellinen syöte")
         publisher = self._io.read("Julkaisija: ")
         keyword = self._io.read("Avainsana, jolla haluat viitata teokseen: ")
-        text = f"""Lisätään {reference} {title} ({year}), kirjoittanut {author},
-                julkaissut {publisher}, avainsanalla {keyword}"""
+        text = f"Lisätään {reference} {title} ({year}), kirjoittanut {author}, "  \
+        f"julkaissut {publisher}, avainsanalla {keyword}"
         self._io.write(text)
 
         data = (reference, title, author, year, publisher, keyword)
