@@ -1,5 +1,3 @@
-from PyInquirer import prompt
-
 class CommandLineUI:
     def __init__(self, io, service):
         self._io = io
@@ -15,7 +13,7 @@ class CommandLineUI:
                 'message': 'Mitä haluat tehdä?',
                 'choices': ['lisää viite','listaa viitteet','poistu']
                 }
-            user_input = prompt(start_input)
+            user_input = self._io.read_pyinquirer(start_input)
 
             if user_input['start input'] == "lisää viite":
                 add_input =  {
@@ -24,7 +22,7 @@ class CommandLineUI:
                 'message': 'Minkälainen viite lisätään?',
                 'choices': ['kirja','lehtiartikkeli','gradu','muu']
                 }
-                reference = prompt(add_input)
+                reference = self._io.read_pyinquirer(add_input)
                 self._service.add_reference(reference['add input'])
 
             elif user_input['start input'] == "listaa viitteet":
