@@ -5,6 +5,16 @@ Library  ../AppLibrary.py
 Input Start App
     Input  lisää viite
 
+Input Human Format
+    Input  ihmisluettava
+
+Input Bibtex Format
+    Input  bibtex
+
+Add Reference BibTex
+    [Arguments]  ${bibtex}
+    Input  ${bibtex}
+
 Add Reference
     [Arguments]  ${kirja}  ${nimi}  ${kirjailija}  ${julkaisuvuosi}  ${julkaisija}  ${avainsana}  ${poistu}
     Input  ${kirja}

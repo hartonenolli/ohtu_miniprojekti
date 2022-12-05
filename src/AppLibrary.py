@@ -1,6 +1,7 @@
 from ui.app import CommandLineUI
 from repositories.datahandler import BibtexHandler
 from services.reference_service import ReferenceServices
+from prompt_toolkit import prompt as toolprompt
 
 class StubIO:
     def __init__(self, inputs=None):
@@ -8,6 +9,11 @@ class StubIO:
         self.outputs = []
 
     def read(self, prompt):
+        if len(self.inputs) > 0:
+            return self.inputs.pop(0)
+        return ""
+
+    def read_bibtex(self, prompt):
         if len(self.inputs) > 0:
             return self.inputs.pop(0)
         return ""
