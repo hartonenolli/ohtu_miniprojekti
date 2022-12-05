@@ -26,12 +26,12 @@ class BibtexHandler:
             with open(file, "a", encoding="utf-8") as bibfile:
                 bibfile.write(writer.write(bibtex))
             return True
-        except:
+        except PermissionError:
             return False
 
     def _create_bibtex_format_bibtexformat(self, bibtex):
-        bp = BibTexParser(interpolate_strings=False)
-        bibtex_entry = bp.parse(bibtex)
+        bibparser = BibTexParser(interpolate_strings=False)
+        bibtex_entry = bibparser.parse(bibtex)
         return bibtex_entry
 
     def write_to_bib_file_bibtexformat(self, bibtex, file):
@@ -42,7 +42,7 @@ class BibtexHandler:
             with open(file, "a", encoding="utf-8") as bibfile:
                 bibfile.write(writer.write(bibtex))
             return True
-        except:
+        except PermissionError:
             return False
 
     def read_from_bib_file(self,file):
@@ -50,5 +50,5 @@ class BibtexHandler:
             with open(file, encoding="utf-8") as bibtex_file:
                 bib_database = bibtexparser.load(bibtex_file)
             return bib_database
-        except:
+        except PermissionError:
             return None

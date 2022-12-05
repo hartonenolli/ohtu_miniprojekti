@@ -1,5 +1,4 @@
 from entities.book import Book
-from prompt_toolkit import prompt
 
 class ReferenceServices:
     def __init__(self, io, bibhandler):
@@ -18,7 +17,9 @@ class ReferenceServices:
                 self._io.write("Virheellinen syöte")
         publisher = self._io.read("Julkaisija: ")
         keyword = self._io.read("Avainsana, jolla haluat viitata teokseen: ")
-        self._io.write(f"Lisätään {reference} {title} ({year}), kirjoittanut {author}, julkaissut {publisher}, avainsanalla {keyword}")
+        text = f"""Lisätään {reference} {title} ({year}), kirjoittanut {author},
+                julkaissut {publisher}, avainsanalla {keyword}"""
+        self._io.write(text)
 
         data = (reference, title, author, year, publisher, keyword)
         if self._bibhandler.write_to_bib_file_humanformat(data,"references.bib"):
