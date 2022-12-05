@@ -22,3 +22,10 @@ Add Wrong Line
     Input  poistu
     Run App
     output Should Contain  Virheellinen syöte.
+
+Add Wrong Year
+    Input Start App
+    Input Human Format
+    Add Wrong Year  kirja  Kivakirja  Kalle Kirjailija  abc  2011  Kaverijulkaisu  Kalle11  poistu
+    Run App
+    Output Should Contain  Virheellinen syöte
