@@ -35,9 +35,6 @@ class AppLibrary():
     def input(self, value):
         self._io.add_input(value)
 
-    def input_int(self, value):
-        self._io.add_input(int(value))
-
     def run_app(self):
         self._app.start_app()
 

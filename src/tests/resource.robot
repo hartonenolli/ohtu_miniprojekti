@@ -10,7 +10,7 @@ Add Reference
     Input  ${kirja}
     Input  ${nimi}
     Input  ${kirjailija}
-    Input Int  ${julkaisuvuosi}
+    Input  ${julkaisuvuosi}
     Input  ${julkaisija}
     Input  ${avainsana}
     Input  ${poistu}
