@@ -56,7 +56,9 @@ class TestCommandLineUI(unittest.TestCase):
 
         self.assertEqual(self.app._service.list_references()[-1].__str__(), self.book.__str__())
 
-    #def test_add_referense_input(self):
-    #    io = StubIO(["lisää viite, Sinuhe Egyptiläinen", "Mika Waltari", "1945", "WSOY", "Waltari45"])
-    #    self.app = CommandLineUI(io, ReferenceServices(io, BibtexHandler()))
-    #   self.app._service.add_reference("kirja")
+    def test_add_referense_input(self):
+        io = StubIO(["listaa viitteet", "poistu"])
+        self.app = CommandLineUI(io, ReferenceServices(io, BibtexHandler()))
+        self.app.start_app()
+
+        self.assertEqual(self.app._service.list_references()[-1].__str__(), self.book.__str__())    
