@@ -9,8 +9,6 @@ class StubIO:
     def __init__(self, inputs):
         self.inputs = inputs
         self.outputs = []
-        #bibhandler = BibtexHandler()
-        #ref_service = ReferenceServices(io, bibhandler)
 
     def read(self, prompt):
         return self.inputs.pop(0)
@@ -37,7 +35,6 @@ class TestCommandLineUI(unittest.TestCase):
     def test_user_input_add_reference_works(self):
         io = StubIO(["lisää viite", "kirja","Sinuhe Egyptiläinen", "Mika Waltari", "1945", "WSOY", "Waltari45", "poistu"])
         self.app = CommandLineUI(io, ReferenceServices(io, BibtexHandler()))
-        #self.app._service.add_reference("kirja")
         self.app.start_app()
 
         self.assertEqual(io.outputs[-2].__str__(), "Lisätään kirja Sinuhe Egyptiläinen (1945), kirjoittanut Mika Waltari, julkaissut WSOY, avainsanalla Waltari45")
@@ -52,7 +49,7 @@ class TestCommandLineUI(unittest.TestCase):
     def test_add_reference_adds_correct_string_to_database(self):
         io = StubIO(["lisää viite", "kirja","Sinuhe Egyptiläinen", "Mika Waltari", "1945", "WSOY", "Waltari45", "poistu"])
         self.app = CommandLineUI(io, ReferenceServices(io, BibtexHandler()))
-        #self.app._service.add_reference("kirja")
+        self.app.start_app()
 
         self.assertEqual(self.app._service.list_references()[-1].__str__(), self.book.__str__())
 
