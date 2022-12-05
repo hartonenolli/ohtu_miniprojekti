@@ -1,12 +1,13 @@
 import bibtexparser
 from bibtexparser.bwriter import BibTexWriter
 from bibtexparser.bibdatabase import BibDatabase
+from bibtexparser.bparser import BibTexParser
 
 class BibtexHandler:
     def __init__(self):
         pass
 
-    def _create_bibtex_format(self, data):
+    def _create_bibtex_format_humanformat(self, data):
         bibtex_entry = BibDatabase()
         bibtex_entry.entries = [
             {"title": str(data[1]),
@@ -17,8 +18,24 @@ class BibtexHandler:
             "ENTRYTYPE": "book"}]
         return bibtex_entry
 
-    def write_to_bib_file(self, data, file):
-        bibtex = self._create_bibtex_format(data)
+    def write_to_bib_file_humanformat(self, data, file):
+        bibtex = self._create_bibtex_format_humanformat(data)
+        writer = BibTexWriter()
+        writer.indent = "    "
+        try:
+            with open(file, "a", encoding="utf-8") as bibfile:
+                bibfile.write(writer.write(bibtex))
+            return True
+        except:
+            return False
+
+    def _create_bibtex_format_bibtexformat(self, bibtex):
+        bp = BibTexParser(interpolate_strings=False)
+        bibtex_entry = bp.parse(bibtex)
+        return bibtex_entry
+
+    def write_to_bib_file_bibtexformat(self, bibtex, file):
+        bibtex = self._create_bibtex_format_bibtexformat(bibtex)
         writer = BibTexWriter()
         writer.indent = "    "
         try:

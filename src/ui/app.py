@@ -16,14 +16,30 @@ class CommandLineUI:
             user_input = self._io.read_pyinquirer(start_input)
 
             if user_input['start input'] == "lisää viite":
-                add_input =  {
+
+                add_input = {
                 'type': 'list',
                 'name': 'add input',
-                'message': 'Minkälainen viite lisätään?',
-                'choices': ['kirja','lehtiartikkeli','gradu','muu']
+                'message': 'Missä muodossa viite lisätään',
+                'choices': ['bibtex', 'ihmisluettava']
                 }
-                reference = self._io.read_pyinquirer(add_input)
-                self._service.add_reference(reference['add input'])
+                user_input = self._io.read_pyinquirer(add_input)
+
+                if user_input['add input'] == "ihmisluettava":
+                    add_input =  {
+                    'type': 'list',
+                    'name': 'add input',
+                    'message': 'Minkälainen viite lisätään?',
+                    'choices': ['kirja','lehtiartikkeli','gradu','muu']
+                    }
+                    reference = self._io.read_pyinquirer(add_input)
+                    self._service.add_reference_humanformat(reference['add input'])
+                
+                if user_input['add input'] == "bibtex":
+                    self._service.add_reference_bibtexformat()
+
+                else:
+                    self._io.write("Virheellinen syöte.")
 
             elif user_input['start input'] == "listaa viitteet":
                 referencelist = self._service.list_references()

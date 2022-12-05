@@ -1,11 +1,12 @@
 from entities.book import Book
+from prompt_toolkit import prompt
 
 class ReferenceServices:
     def __init__(self, io, bibhandler):
         self._io = io
         self._bibhandler = bibhandler
 
-    def add_reference(self, reference):
+    def add_reference_humanformat(self, reference):
         self._io.write("Syötä viitteen tiedot:")
         title = self._io.read("Kirjan nimi: ")
         author = self._io.read("Kijailija: ")
@@ -20,7 +21,7 @@ class ReferenceServices:
         self._io.write(f"Lisätään {reference} {title} ({year}), kirjoittanut {author}, julkaissut {publisher}, avainsanalla {keyword}")
 
         data = (reference, title, author, year, publisher, keyword)
-        if self._bibhandler.write_to_bib_file(data,"references.bib"):
+        if self._bibhandler.write_to_bib_file_humanformat(data,"references.bib"):
             self._io.write("BibTex tiedoston kirjoittaminen onnistui")
         else:
             self._io.write("BibTex tiedoston kirjoittaminen epäonnistui")
@@ -30,6 +31,16 @@ class ReferenceServices:
 
     def delete_reference(self,reference):
         pass
+
+    def add_reference_bibtexformat(self):
+        bibtex = self._io.read_bibtex("Syötä kirjan bibtex: ")
+        if self._bibhandler.write_to_bib_file_bibtexformat(bibtex, "references.bib"):
+            self._io.write("BibTex tiedoston kirjoittaminen onnistui")
+        else:
+            self._io.write("BibTex tiedoston kirjoittaminen epäonnistui")
+
+
+
 
     def list_references(self):
         references = self._bibhandler.read_from_bib_file("references.bib")
