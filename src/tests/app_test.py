@@ -35,12 +35,6 @@ class TestCommandLineUI(unittest.TestCase):
         
         self.assertEqual(self.app._run, False)
 
-    def test_user_input_not_in_options_works(self):
-        io = StubIO(["käpistely", "poistu"])
-        self.app = CommandLineUI(io, None)
-        self.app.start_app()
-        self.assertEqual(io.outputs[1], "Virheellinen syöte.")
-
     def test_add_reference_humanformat_calls_right_function(self):
         io = StubIO(["lisää viite", "ihmisluettava", "kirja","Sinuhe Egyptiläinen", "Mika Waltari", "1945", "WSOY", "Waltari45", "poistu"])
         self.service_mock = Mock(wraps=ReferenceServices(io, self.bibhandler_mock))

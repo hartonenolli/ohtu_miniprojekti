@@ -41,12 +41,10 @@ class CommandLineUI:
                     }
                     reference = self._io.read_pyinquirer(add_input)
                     self._service.add_reference_humanformat(reference['add input'])
-                
-                if user_input['add input'] == "bibtex":
+
+                elif user_input['add input'] == "bibtex":
                     self._service.add_reference_bibtexformat()
 
-                else:
-                    self._io.write("Virheellinen syöte.")
 
             elif user_input['start input'] == "listaa viitteet":
                 referencelist = self._service.list_references()
@@ -58,6 +56,3 @@ class CommandLineUI:
 
             elif user_input['start input'] == "poistu":
                 self._run = False
-
-            else:
-                self._io.write("Virheellinen syöte.")

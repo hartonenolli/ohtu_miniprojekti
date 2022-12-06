@@ -17,12 +17,6 @@ Add Bibtex Book
     Run App
     Output Should Contain  BibTex tiedoston kirjoittaminen onnistui
 
-Add Wrong Line
-    Input  abc
-    Input  poistu
-    Run App
-    output Should Contain  Virheellinen syöte.
-
 Add Wrong Year
     Input Start App
     Input Human Format
