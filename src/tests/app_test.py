@@ -20,10 +20,14 @@ class StubIO:
         d = {}
         d[value["name"]] = self.inputs.pop(0)
         return d
+    
+    def read_bibtex(self, prompt):
+        return self.inputs.pop(0)
 
 class TestCommandLineUI(unittest.TestCase):
     def setUp(self):
         self.book = Book("Mika Waltari", "Sinuhe Egyptiläinen", "WSOY", "1945")
+        self.bibhandler_mock = Mock(wraps=BibtexHandler())
 
     def test_user_input_exit_works(self):
         io = StubIO(["poistu"])
@@ -32,27 +36,49 @@ class TestCommandLineUI(unittest.TestCase):
         
         self.assertEqual(self.app._run, False)
 
-    def test_user_input_add_reference_works(self):
-        io = StubIO(["lisää viite", "ihmisluettava", "kirja","Sinuhe Egyptiläinen", "Mika Waltari", "1945", "WSOY", "Waltari45", "poistu"])
-        self.app = CommandLineUI(io, ReferenceServices(io, BibtexHandler()))
-        self.app.start_app()
-
-        self.assertEqual(io.outputs[-3].__str__(), "Lisätään kirja Sinuhe Egyptiläinen (1945), kirjoittanut Mika Waltari, julkaissut WSOY, avainsanalla Waltari45")
-
     def test_user_input_not_in_options_works(self):
         io = StubIO(["käpistely", "poistu"])
         self.app = CommandLineUI(io, None)
         self.app.start_app()
         self.assertEqual(io.outputs[1], "Virheellinen syöte.")
 
-    def test_add_reference_adds_correct_string_to_database(self):
-        io = StubIO(["lisää viite", "ihmisluettava", "kirja","Sinuhe Egyptiläinen", "Mika Waltari", "1945", "WSOY", "Waltari45", "poistu"])
-        self.app = CommandLineUI(io, ReferenceServices(io, BibtexHandler()))
-        self.app.start_app()
-        self.assertEqual(self.app._service.list_references()[-1].__str__(), self.book.__str__())
-
     def test_add_referense_input(self):
         io = StubIO(["listaa viitteet", "poistu"])
         self.app = CommandLineUI(io, ReferenceServices(io, BibtexHandler()))
         self.app.start_app()
-        self.assertEqual(self.app._service.list_references()[-1].__str__(), self.book.__str__())    
+        self.assertEqual(self.app._service.list_references()[-1].__str__(), self.book.__str__())
+
+    def test_add_reference_humanformat_calls_right_function(self):
+        io = StubIO(["lisää viite", "ihmisluettava", "kirja","Sinuhe Egyptiläinen", "Mika Waltari", "1945", "WSOY", "Waltari45", "poistu"])
+        self.service_mock = Mock(wraps=ReferenceServices(io, self.bibhandler_mock))
+        self.app = CommandLineUI(io, self.service_mock)
+        self.app.start_app()
+
+        self.assertEqual(self.service_mock.add_reference_humanformat.call_count, 1)
+
+    def test_add_reference_bibtexformat_calls_right_function(self):
+        io = StubIO(["lisää viite", "bibtex", "kirja","testisyöte", "poistu"])
+        self.service_mock = Mock(wraps=ReferenceServices(io, self.bibhandler_mock))
+        self.app = CommandLineUI(io, self.service_mock)
+        self.app.start_app()
+
+        self.assertEqual(self.service_mock.add_reference_bibtexformat.call_count, 1)
+
+    def test_list_references_with_empty_file_returns_correct_output(self):
+        io = StubIO(["listaa viitteet", "poistu"])
+        self.service_mock = Mock(wraps=ReferenceServices(io, self.bibhandler_mock))
+        self.app = CommandLineUI(io, self.service_mock)
+        self.service_mock.list_references.return_value = None
+        self.app.start_app()
+
+        self.assertEqual(io.outputs[-1], "Viitekirjasto on tyhjä.")
+
+    def test_list_references_with_non_empty_file_returns_correct_output(self):
+        io = StubIO(["listaa viitteet", "poistu"])
+        self.service_mock = Mock(wraps=ReferenceServices(io, self.bibhandler_mock))
+        self.app = CommandLineUI(io, self.service_mock)
+        self.service_mock.list_references.return_value = ["testi1", "testi2"]
+        self.app.start_app()
+
+        self.assertEqual(self.service_mock.list_references.call_count, 1)
+        self.assertEqual(io.outputs[-1], "testi2")
