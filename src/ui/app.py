@@ -1,3 +1,6 @@
+import os
+from os import name
+
 class CommandLineUI:
     def __init__(self, io, service):
         self._io = io
@@ -5,6 +8,10 @@ class CommandLineUI:
         self._run = True
 
     def start_app(self):
+        if name == 'nt':
+            os.system('cls')
+        else:
+            os.system('clear')
         self._io.write("Tervetuloa viitekirjastoon!")
         while self._run is True:
             start_input = {
