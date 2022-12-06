@@ -26,7 +26,6 @@ class StubIO:
 
 class TestCommandLineUI(unittest.TestCase):
     def setUp(self):
-        self.book = Book("Mika Waltari", "Sinuhe Egyptiläinen", "WSOY", "1945")
         self.bibhandler_mock = Mock(wraps=BibtexHandler())
 
     def test_user_input_exit_works(self):
@@ -41,12 +40,6 @@ class TestCommandLineUI(unittest.TestCase):
         self.app = CommandLineUI(io, None)
         self.app.start_app()
         self.assertEqual(io.outputs[1], "Virheellinen syöte.")
-
-    def test_add_referense_input(self):
-        io = StubIO(["listaa viitteet", "poistu"])
-        self.app = CommandLineUI(io, ReferenceServices(io, BibtexHandler()))
-        self.app.start_app()
-        self.assertEqual(self.app._service.list_references()[-1].__str__(), self.book.__str__())
 
     def test_add_reference_humanformat_calls_right_function(self):
         io = StubIO(["lisää viite", "ihmisluettava", "kirja","Sinuhe Egyptiläinen", "Mika Waltari", "1945", "WSOY", "Waltari45", "poistu"])
