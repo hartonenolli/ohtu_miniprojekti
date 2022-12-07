@@ -27,8 +27,6 @@ class ReferenceServices:
         else:
             self._io.write("BibTex tiedoston kirjoittaminen epäonnistui")
 
-    def edit_reference(self, reference):
-        pass
 
     def delete_reference(self,reference):
         pass
@@ -39,8 +37,6 @@ class ReferenceServices:
             self._io.write("BibTex tiedoston kirjoittaminen onnistui")
         else:
             self._io.write("BibTex tiedoston kirjoittaminen epäonnistui")
-
-
 
 
     def list_references(self):
