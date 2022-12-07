@@ -37,7 +37,7 @@ class CommandLineUI:
                     'type': 'list',
                     'name': 'add input',
                     'message': 'Minkälainen viite lisätään?',
-                    'choices': ['kirja','lehtiartikkeli','gradu','muu']
+                    'choices': ['kirja','lehtiartikkeli','gradu','tutkimusraportti','muu']
                     }
                     reference = self._io.read_pyinquirer(add_input)
                     self._service.add_reference_humanformat(reference['add input'])
