@@ -5,6 +5,7 @@ class ReferenceServices:
     def __init__(self, io, bibhandler):
         self._io = io
         self._bibhandler = bibhandler
+        
     def add_reference_humanformat(self, reference):
         self._io.write("Syötä viitteen tiedot:")
         title = self._io.read("Nimi: ")
@@ -45,10 +46,13 @@ class ReferenceServices:
             refs.append(book)
         return refs
 
-#Uusi funktio viittauksen lisäämiseen. Entry-typestä riippuen kysytään oikeat attribuutit. Loppuihin tulee None.
-#Funktio kutsuu reference-olion create_bibtex_entry metodia, jonka paluuarvona on suoraan bibtex-tallennettava formaatti.
-#Paluuarvo viedään bibhandlerille, joka ainoastaan kirjoittaa.
-#HUOM käyttö rikkoo testejä atm. List_references ei vielä osaa lukea kaikkia attribuutteja.
+# Uusi funktio viittauksen lisäämiseen. Entry-typestä
+# riippuen kysytään oikeat attribuutit. Loppuihin tulee None.
+# Funktio kutsuu reference-olion create_bibtex_entry metodia,
+# jonka paluuarvona on suoraan bibtex-tallennettava formaatti.
+# Paluuarvo viedään bibhandlerille, joka ainoastaan kirjoittaa.
+# HUOM käyttö rikkoo testejä atm. List_references ei
+# vielä osaa lukea kaikkia attribuutteja.
 
     def add_reference_humanformat_new(self, entry_type):
         self._io.write("Syötä viitteen tiedot:")

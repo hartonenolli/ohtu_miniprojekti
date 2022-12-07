@@ -54,8 +54,10 @@ class BibtexHandler:
         except PermissionError:
             return None
 
-#Uusi kirjoitusfunktio. Reference-olio luo itse itsestään bibtex-entryn oikeassa formaatissa tyypistä
-# (kirja, artikkeli jne. riippuen), ja tämä funktio hoitaa vain kirjoittamisen.
+# Uusi kirjoitusfunktio. Reference-olio luo itse itsestään
+# bibtex-entryn oikeassa formaatissa tyypistä
+# (kirja, artikkeli jne. riippuen), ja tämä funktio hoitaa 
+# vain kirjoittamisen.
 
     def write_to_bib_file_humanformat_new(self, entry, file):
         writer = BibTexWriter()
