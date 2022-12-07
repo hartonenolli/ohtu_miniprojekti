@@ -5,7 +5,7 @@ from bibtexparser.bparser import BibTexParser
 
 class BibtexHandler:
     def __init__(self):
-        pass
+        self._writer = BibTexWriter()
 
     def _create_bibtex_format_humanformat(self, data):
         bibtex_entry = BibDatabase()
@@ -20,11 +20,10 @@ class BibtexHandler:
 
     def write_to_bib_file_humanformat(self, data, file):
         bibtex = self._create_bibtex_format_humanformat(data)
-        writer = BibTexWriter()
-        writer.indent = "    "
+        self._writer.indent = "    "
         try:
             with open(file, "a", encoding="utf-8") as bibfile:
-                bibfile.write(writer.write(bibtex))
+                bibfile.write(self._writer.write(bibtex))
             return True
         except PermissionError:
             return False
@@ -36,11 +35,10 @@ class BibtexHandler:
 
     def write_to_bib_file_bibtexformat(self, bibtex, file):
         bibtex = self._create_bibtex_format_bibtexformat(bibtex)
-        writer = BibTexWriter()
-        writer.indent = "    "
+        self._writer.indent = "    "
         try:
             with open(file, "a", encoding="utf-8") as bibfile:
-                bibfile.write(writer.write(bibtex))
+                bibfile.write(self._writer.write(bibtex))
             return True
         except PermissionError:
             return False
