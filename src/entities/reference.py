@@ -18,10 +18,16 @@ class Reference:
         self._note = note
 
     def create_bibtex_entry(self):
+        bibtex_entry = BibDatabase()
         if self._type == 'kirja':
-            return None
-        if self._type == 'lehtiartikkeli':
-            bibtex_entry = BibDatabase()
+            bibtex_entry.entries = [
+            {"title": self._title,
+            "author": self._author,
+            "year": str(self._year),
+            "publisher": self._publisher,
+            "ENTRYTYPE": "book",
+            "ID": self._id}]
+        elif self._type == 'lehtiartikkeli':
             bibtex_entry.entries = [
             {"title": self._title,
             "author": self._author,
@@ -29,12 +35,31 @@ class Reference:
             "journal": self._journal,
             "ENTRYTYPE": "article",
             "ID": self._id}]
-            return bibtex_entry
-        if self._type == 'gradu':
-            return None
-        if self._type == 'tutkimusraportti':
-            return None
-        return None
+        elif self._type == 'gradu':
+            bibtex_entry.entries = [
+            {"title": self._title,
+            "author": self._author,
+            "year": str(self._year),
+            "school": self._school,
+            "ENTRYTYPE": "thesis",
+            "ID": self._id}]
+        elif self._type == 'tutkimusraportti':
+            bibtex_entry.entries = [
+            {"title": self._title,
+            "author": self._author,
+            "year": str(self._year),
+            "institution": self._institution,
+            "ENTRYTYPE": "tech report",
+            "ID": self._id}]
+        else:
+            bibtex_entry.entries = [
+            {"title": self._title,
+            "author": self._author,
+            "year": str(self._year),
+            "note": self._note,
+            "ENTRYTYPE": "article",
+            "ID": self._id}]
+        return bibtex_entry
 
     def __str__(self):
         if self._type == 'kirja':
