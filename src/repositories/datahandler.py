@@ -2,6 +2,7 @@ import bibtexparser
 from bibtexparser.bwriter import BibTexWriter
 from bibtexparser.bibdatabase import BibDatabase
 from bibtexparser.bparser import BibTexParser
+from entities.reference import Reference
 
 class BibtexHandler:
     def __init__(self):
@@ -52,3 +53,16 @@ class BibtexHandler:
             return bib_database
         except PermissionError:
             return None
+
+#Uusi kirjoitusfunktio. Reference-olio luo itse itsestään bibtex-entryn oikeassa formaatissa tyypistä
+# (kirja, artikkeli jne. riippuen), ja tämä funktio hoitaa vain kirjoittamisen.
+
+    def write_to_bib_file_humanformat_new(self, entry, file):
+        writer = BibTexWriter()
+        writer.indent = "    "
+        try:
+            with open(file, "a", encoding="utf-8") as bibfile:
+                bibfile.write(writer.write(entry))
+            return True
+        except PermissionError:
+            return False
