@@ -5,10 +5,10 @@ Resource  resource.robot
 Add One Thesis
     Input Start App
     Input Human Format
-    Add Reference  Matti15  Gradu  Matti Meikäläinen  2015  Parasjulkaisu
+    Add Reference  gradu  Matti15  Gradu  Matti Meikäläinen  2015  HY
     Input  poistu
     Run App
-    Output Should Contain  Lisätään Matti Meikäläinen. 2015. Gradu. Parasjulkaisu.
+    Output Should Contain  Lisätään Matti Meikäläinen. 2015. Gradu. HY.
 
 Add Bibtex Thesis
     Input Start App
@@ -21,8 +21,8 @@ Add Bibtex Thesis
 List Thesis
     Input Start App
     Input Human Format
-    Add Reference  Matti16  Gradu  Matti Meikäläinen  2016  Parasjulkaisu
+    Add Reference  gradu  Matti16  Gradu  Matti Meikäläinen  2016  HY
     Input  listaa viitteet
     Input  poistu
     Run App
-    Output Should Contain  Matti Meikäläinen. 2016. Gradu. Parasjulkaisu.
+    Output Should Contain  Matti Meikäläinen. 2016. Gradu. HY.
