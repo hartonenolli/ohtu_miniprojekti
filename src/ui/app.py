@@ -50,7 +50,7 @@ class CommandLineUI:
                 referencelist = self._service.list_references()
                 if referencelist:
                     for reference in referencelist:
-                        self._io.write(reference)
+                        self._io.write(str(reference))
                 else:
                     self._io.write("Viitekirjasto on tyhjä.")
 

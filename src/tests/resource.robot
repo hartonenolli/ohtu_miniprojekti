@@ -16,23 +16,10 @@ Add Reference BibTex
     Input  ${bibtex}
 
 Add Reference
-    [Arguments]  ${kirja}  ${nimi}  ${kirjailija}  ${julkaisuvuosi}  ${julkaisija}  ${avainsana}  ${poistu}
+    [Arguments]  ${kirja}  ${avainsana}  ${nimi}  ${kirjailija}  ${julkaisuvuosi}  ${julkaisija}
     Input  ${kirja}
+    Input  ${avainsana}
     Input  ${nimi}
     Input  ${kirjailija}
     Input  ${julkaisuvuosi}
     Input  ${julkaisija}
-    Input  ${avainsana}
-    Input  ${poistu}
-
-Add Wrong Year
-    [Arguments]  ${kirja}  ${nimi}  ${kirjailija}  ${julkaisuvuosi1}  ${julkaisuvuosi2}  ${julkaisija}  ${avainsana}  ${poistu}
-    Input  ${kirja}
-    Input  ${kirja}
-    Input  ${nimi}
-    Input  ${kirjailija}
-    Input  ${julkaisuvuosi1}
-    Input  ${julkaisuvuosi2}
-    Input  ${julkaisija}
-    Input  ${avainsana}
-    Input  ${poistu}

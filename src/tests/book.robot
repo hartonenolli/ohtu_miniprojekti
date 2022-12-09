@@ -5,9 +5,10 @@ Resource  resource.robot
 Add One Book
     Input Start App
     Input Human Format
-    Add reference  kirja  Kivakirja  Kalle Kirjailija  2011  Kaverijulkaisu  Kalle11  poistu
+    Add Reference  kirja  Kalle11  Kivakirja  Kalle Kirjailija  2011  Kaverijulkaisu
+    Input  poistu
     Run App
-    Output Should Contain  Lisätään kirja Kivakirja (2011), kirjoittanut Kalle Kirjailija, julkaissut Kaverijulkaisu, avainsanalla Kalle11
+    Output Should Contain  Lisätään Kalle Kirjailija. 2011. Kivakirja. Kaverijulkaisu.
 
 Add Bibtex Book
     Input Start App
@@ -17,9 +18,11 @@ Add Bibtex Book
     Run App
     Output Should Contain  BibTex tiedoston kirjoittaminen onnistui
 
-Add Wrong Year
+List Book
     Input Start App
     Input Human Format
-    Add Wrong Year  kirja  Kivakirja  Kalle Kirjailija  abc  2011  Kaverijulkaisu  Kalle11  poistu
+    Add Reference  kirja  Kalle12  Kivakirja osa 2  Kalle Kirjailija  2012  Kaverijulkaisu
+    Input  listaa viitteet
+    Input  poistu
     Run App
-    Output Should Contain  Virheellinen syöte
+    Output Should Contain  Kalle Kirjailija. 2012. Kivakirja osa 2. Kaverijulkaisu.
