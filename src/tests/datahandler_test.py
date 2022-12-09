@@ -57,4 +57,3 @@ class TestBibtexHandler(unittest.TestCase):
         read_result = self.bibHandler.read_from_bib_file(test_file.name)
         self.assertEqual(read_result.entries[0], self.data)
         unlink(test_file.name)
-        

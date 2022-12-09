@@ -77,7 +77,7 @@ class TestReferenceServices(unittest.TestCase):
 
         self.assertEqual(self.bibhandler_mock.read_from_bib_file.call_count, 1)
 
-    def test_list_references_returns_correct_format(self):
+    def test_list_references_returns_correct_format_book(self):
         data = Mock(entries = [{
             "ENTRYTYPE": "book",
             "author": "1",
@@ -91,3 +91,106 @@ class TestReferenceServices(unittest.TestCase):
         self.bibhandler_mock.read_from_bib_file.return_value = data
         
         self.assertEqual(ref_service.list_references()[0].__str__(), "1. 4. 2. 3.")
+
+    def test_add_reference_humanformat_works_with_article(self):
+        io = StubIO(["avainsana", "nimi", "kirjoittaja", "1", "julkaisu"])
+        ref_service = ReferenceServices(io, self.bibhandler_mock, self.filename)
+        ref_service.add_reference_humanformat("lehtiartikkeli")
+
+        self.assertEqual(io.outputs[-1], "BibTex tiedoston kirjoittaminen onnistui")
+
+    def test_add_reference_humanformat_works_gradu(self):
+        io = StubIO(["avainsana", "nimi", "kirjoittaja", "1", "koulu"])
+        ref_service = ReferenceServices(io, self.bibhandler_mock, self.filename)
+        ref_service.add_reference_humanformat("gradu")
+
+        self.assertEqual(io.outputs[-1], "BibTex tiedoston kirjoittaminen onnistui")
+
+    def test_add_reference_humanformat_works_with_tutkimus(self):
+        io = StubIO(["avainsana", "nimi", "kirjoittaja", "1", "orgasinattio"])
+        ref_service = ReferenceServices(io, self.bibhandler_mock, self.filename)
+        ref_service.add_reference_humanformat("tutkimusraportti")
+
+        self.assertEqual(io.outputs[-1], "BibTex tiedoston kirjoittaminen onnistui")
+
+    def test_add_reference_humanformat_works_with_julkaisematon(self):
+        io = StubIO(["avainsana", "nimi", "kirjoittaja", "1", "kommentti"])
+        ref_service = ReferenceServices(io, self.bibhandler_mock, self.filename)
+        ref_service.add_reference_humanformat("julkaisematon")
+
+        self.assertEqual(io.outputs[-1], "BibTex tiedoston kirjoittaminen onnistui")
+
+    def test_list_references_returns_correct_format_article(self):
+        data = Mock(entries = [{
+            "ENTRYTYPE": "article",
+            "author": "1",
+            "title": "2",
+            "journal": "3",
+            "year": "4",
+            "ID": "1"
+        }])
+        io = StubIO([])
+        ref_service = ReferenceServices(io, self.bibhandler_mock, self.filename)
+        self.bibhandler_mock.read_from_bib_file.return_value = data
+        
+        self.assertEqual(ref_service.list_references()[0].__str__(), "1. 4. 2. 3.")
+
+    def test_list_references_returns_correct_format_gradu(self):
+        data = Mock(entries = [{
+            "ENTRYTYPE": "mastersthesis",
+            "author": "1",
+            "title": "2",
+            "school": "3",
+            "year": "4",
+            "ID": "1"
+        }])
+        io = StubIO([])
+        ref_service = ReferenceServices(io, self.bibhandler_mock, self.filename)
+        self.bibhandler_mock.read_from_bib_file.return_value = data
+        
+        self.assertEqual(ref_service.list_references()[0].__str__(), "1. 4. 2. 3.")
+
+    def test_list_references_returns_correct_format_techreport(self):
+        data = Mock(entries = [{
+            "ENTRYTYPE": "techreport",
+            "author": "1",
+            "title": "2",
+            "institution": "3",
+            "year": "4",
+            "ID": "1"
+        }])
+        io = StubIO([])
+        ref_service = ReferenceServices(io, self.bibhandler_mock, self.filename)
+        self.bibhandler_mock.read_from_bib_file.return_value = data
+        
+        self.assertEqual(ref_service.list_references()[0].__str__(), "1. 4. 2. 3.")
+
+    def test_list_references_returns_correct_format_unpublished(self):
+        data = Mock(entries = [{
+            "ENTRYTYPE": "unpublished",
+            "author": "1",
+            "title": "2",
+            "note": "3",
+            "year": "4",
+            "ID": "1"
+        }])
+        io = StubIO([])
+        ref_service = ReferenceServices(io, self.bibhandler_mock, self.filename)
+        self.bibhandler_mock.read_from_bib_file.return_value = data
+        
+        self.assertEqual(ref_service.list_references()[0].__str__(), "1. 4. 2. 3.")
+
+    def test_list_references_returns_correct_format_unpublished_year_None(self):
+        data = Mock(entries = [{
+            "ENTRYTYPE": "unpublished",
+            "author": "1",
+            "title": "2",
+            "note": "3",
+            "year": "None",
+            "ID": "1"
+        }])
+        io = StubIO([])
+        ref_service = ReferenceServices(io, self.bibhandler_mock, self.filename)
+        self.bibhandler_mock.read_from_bib_file.return_value = data
+        
+        self.assertEqual(ref_service.list_references()[0].__str__(), "1. 2. 3.")
