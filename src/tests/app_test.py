@@ -1,4 +1,5 @@
 import unittest
+from tempfile import NamedTemporaryFile
 from ui.app import CommandLineUI
 from entities.book import Book
 from unittest.mock import Mock
@@ -27,7 +28,8 @@ class StubIO:
 class TestCommandLineUI(unittest.TestCase):
     def setUp(self):
         self.bibhandler_mock = Mock(wraps=BibtexHandler())
-        self.filename = "test.bib"
+        test_file = NamedTemporaryFile(encoding="utf-8", mode="w+", delete=False)
+        self.filename = test_file.name
 
     def test_user_input_exit_works(self):
         io = StubIO(["poistu"])

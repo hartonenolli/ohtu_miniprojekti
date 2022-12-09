@@ -1,4 +1,5 @@
 from ui.app import CommandLineUI
+from tempfile import NamedTemporaryFile
 from repositories.datahandler import BibtexHandler
 from services.reference_service import ReferenceServices
 from prompt_toolkit import prompt as toolprompt
@@ -35,7 +36,8 @@ class AppLibrary():
     def __init__(self):
         self._io = StubIO()
         self._bibhandler = BibtexHandler()
-        self._ref_service = ReferenceServices(self._io, self._bibhandler, "robottest.bib")
+        test_file = NamedTemporaryFile(encoding="utf-8", mode="w+", delete=False)
+        self._ref_service = ReferenceServices(self._io, self._bibhandler, test_file.name)
         self._app = CommandLineUI(self._io, self._ref_service)
 
     def input(self, value):

@@ -1,4 +1,5 @@
 import unittest
+from tempfile import NamedTemporaryFile
 from services.reference_service import ReferenceServices
 from repositories.datahandler import BibtexHandler
 from unittest.mock import Mock
@@ -30,7 +31,8 @@ class StubData:
 class TestReferenceServices(unittest.TestCase):
     def setUp(self):
         self.bibhandler_mock = Mock(wraps=BibtexHandler())
-        self.filename = "test.bib"
+        test_file = NamedTemporaryFile(encoding="utf-8", mode="w+", delete=False)
+        self.filename = test_file.name
 
     def test_add_reference_humanformat_works_with_correct_year_format(self):
         io = StubIO(["Sinuhe Egyptiläinen", "Mika Waltari", "1945", "WSOY", "avainsana"])
