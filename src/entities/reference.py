@@ -41,7 +41,7 @@ class Reference:
             "author": self._author,
             "year": str(self._year),
             "school": self._school,
-            "ENTRYTYPE": "thesis",
+            "ENTRYTYPE": "mastersthesis",
             "ID": self._id}]
         elif self._type == 'tutkimusraportti':
             bibtex_entry.entries = [
@@ -49,7 +49,7 @@ class Reference:
             "author": self._author,
             "year": str(self._year),
             "institution": self._institution,
-            "ENTRYTYPE": "tech report",
+            "ENTRYTYPE": "techreport",
             "ID": self._id}]
         else:
             bibtex_entry.entries = [
@@ -57,7 +57,7 @@ class Reference:
             "author": self._author,
             "year": str(self._year),
             "note": self._note,
-            "ENTRYTYPE": "article",
+            "ENTRYTYPE": "unpublished",
             "ID": self._id}]
         return bibtex_entry
 

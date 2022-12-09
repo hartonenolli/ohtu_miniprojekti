@@ -47,6 +47,32 @@ class ReferenceServices:
             refs.append(book)
         return refs
 
+
+    def list_references_new(self):
+        references = self._bibhandler.read_from_bib_file(self.filename)
+        refs = []
+        for entry in references.entries:
+            if entry["ENTRYTYPE"] == "book":
+                reference = Reference("kirja", entry["ID"], entry["title"],
+                entry["author"], entry["year"], entry["publisher"])
+
+            elif entry["ENTRYTYPE"] == "article":
+                reference = Reference("lehtiartikkeli", entry["ID"], entry["title"],
+                entry["author"], entry["year"], None, entry["journal"])
+
+            elif entry["ENTRYTYPE"] == "mastersthesis":
+                reference = Reference("gradu", entry["ID"], entry["title"],
+                entry["author"], entry["year"], None, None, entry["school"])
+
+            elif entry["ENTRYTYPE"] == "techreport":
+                reference = Reference("tutkimusraportti", entry["ID"], entry["title"],
+                entry["author"], entry["year"], None, None, None, entry["institution"])
+            else:
+                reference = Reference("julkaisematon", entry["ID"], entry["title"],
+                entry["author"], entry["year"], None, None, None, None, entry["note"])
+            refs.append(reference)
+        return refs
+
 # Uusi funktio viittauksen lisäämiseen. Entry-typestä
 # riippuen kysytään oikeat attribuutit. Loppuihin tulee None.
 # Funktio kutsuu reference-olion create_bibtex_entry metodia,

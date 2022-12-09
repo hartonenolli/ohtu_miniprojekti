@@ -37,17 +37,17 @@ class CommandLineUI:
                     'type': 'list',
                     'name': 'add input',
                     'message': 'Minkälainen viite lisätään?',
-                    'choices': ['kirja','lehtiartikkeli','gradu','tutkimusraportti','muu']
+                    'choices': ['kirja','lehtiartikkeli','gradu','tutkimusraportti','julkaisematon']
                     }
-                    reference = self._io.read_pyinquirer(add_input)
-                    self._service.add_reference_humanformat(reference['add input'])
+                    entry_type = self._io.read_pyinquirer(add_input)
+                    self._service.add_reference_humanformat_new(entry_type['add input'])
 
                 elif user_input['add input'] == "bibtex":
                     self._service.add_reference_bibtexformat()
 
 
             elif user_input['start input'] == "listaa viitteet":
-                referencelist = self._service.list_references()
+                referencelist = self._service.list_references_new()
                 if referencelist:
                     for reference in referencelist:
                         self._io.write(reference)
