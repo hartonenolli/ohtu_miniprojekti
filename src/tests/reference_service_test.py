@@ -41,13 +41,6 @@ class TestReferenceServices(unittest.TestCase):
 
         self.assertEqual(io.outputs[-1], "BibTex tiedoston kirjoittaminen onnistui")
 
-    def test_add_reference_humanformat_returns_error_output_with_incorrect_year_format(self):
-        io = StubIO(["Sinuhe Egyptiläinen", "Mika Waltari", "aaa", "1945", "WSOY", "avainsana"])
-        ref_service = ReferenceServices(io, self.bibhandler_mock, self.filename)
-        ref_service.add_reference_humanformat("kirja")
-
-        self.assertEqual(io.outputs[-3], "Virheellinen syöte")
-
     def test_add_reference_humanformat_returns_correct_output_when_writing_to_file_does_not_succeed(self):
         io = StubIO(["Sinuhe Egyptiläinen", "Mika Waltari", "1945", "WSOY", "avainsana"])
         ref_service = ReferenceServices(io, self.bibhandler_mock, self.filename)
@@ -86,13 +79,15 @@ class TestReferenceServices(unittest.TestCase):
 
     def test_list_references_returns_correct_format(self):
         data = Mock(entries = [{
+            "ENTRYTYPE": "book",
             "author": "1",
             "title": "2",
             "publisher": "3",
-            "year": "4"
+            "year": "4",
+            "ID": "1"
         }])
         io = StubIO([])
         ref_service = ReferenceServices(io, self.bibhandler_mock, self.filename)
         self.bibhandler_mock.read_from_bib_file.return_value = data
         
-        self.assertEqual(ref_service.list_references()[0].__str__(), "1, 2. 3, 4.")
+        self.assertEqual(ref_service.list_references()[0].__str__(), "1. 4. 2. 3.")
