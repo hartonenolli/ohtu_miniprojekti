@@ -13,7 +13,7 @@ Add One Tech Report
 Add Bibtex Tech Report
     Input Start App
     Input Bibtex Format
-    Add Reference Bibtex  @techreport{citekey, author = "", title = "", institution = "", year = "" }
+    Add Reference Bibtex  @techreport{citekey, author = "Example", title = "EsimerkkiTitle", institution = "Instituutio", year = "2022" }
     Input  poistu
     Run App
     Output Should Contain  BibTex tiedoston kirjoittaminen onnistui
