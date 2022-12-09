@@ -1,15 +1,15 @@
 from bibtexparser.bibdatabase import BibDatabase
 
 class Reference:
-    def __init__(self, type, id, title, author, year=None,
+    def __init__(self, ref_type, key, title, author, year=None,
     publisher=None, journal=None, school=None, institution=None, note=None):
-        self._id = id
-        self._type = type
+        self._id = key
+        self._type = ref_type
         self._title = title
         self._author = author
         try:
             self._year = int(year)
-        except:
+        except ValueError:
             self._year = None
         self._publisher = publisher
         self._journal = journal

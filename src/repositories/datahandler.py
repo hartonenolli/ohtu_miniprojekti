@@ -2,7 +2,6 @@ import bibtexparser
 from bibtexparser.bwriter import BibTexWriter
 from bibtexparser.bibdatabase import BibDatabase
 from bibtexparser.bparser import BibTexParser
-from entities.reference import Reference
 
 class BibtexHandler:
     def __init__(self):
@@ -56,7 +55,7 @@ class BibtexHandler:
 
 # Uusi kirjoitusfunktio. Reference-olio luo itse itsestään
 # bibtex-entryn oikeassa formaatissa tyypistä
-# (kirja, artikkeli jne. riippuen), ja tämä funktio hoitaa 
+# (kirja, artikkeli jne. riippuen), ja tämä funktio hoitaa
 # vain kirjoittamisen.
 
     def write_to_bib_file_humanformat_new(self, entry, file):

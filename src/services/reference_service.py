@@ -6,7 +6,7 @@ class ReferenceServices:
         self._io = io
         self._bibhandler = bibhandler
         self.filename = filename
-        
+
     def add_reference_humanformat(self, reference):
         self._io.write("Syötä viitteen tiedot:")
         title = self._io.read("Nimi: ")
@@ -57,26 +57,28 @@ class ReferenceServices:
 
     def add_reference_humanformat_new(self, entry_type):
         self._io.write("Syötä viitteen tiedot:")
-        id = self._io.read("Avainsana, jolla haluat viitata teokseen: ")
+        key = self._io.read("Avainsana, jolla haluat viitata teokseen: ")
         title = self._io.read("Nimi: ")
         author = self._io.read("Kirjoittaja/t: ")
         year = self._io.read("Julkaisuvuosi (jätä tyhjäksi jos ei ole): ")
         if entry_type == 'kirja':
             publisher = self._io.read("Kustantaja: ")
-            reference = Reference(entry_type, id, title, author, year, publisher)
+            reference = Reference(entry_type, key, title, author, year, publisher)
         elif entry_type == 'lehtiartikkeli':
             journal = self._io.read("Julkaisu: ")
-            reference = Reference(entry_type, id, title, author, year, None, journal)
+            reference = Reference(entry_type, key, title, author, year, None, journal)
         elif entry_type == 'gradu':
             school = self._io.read("Koulu: ")
-            reference = Reference(entry_type, id, title, author, year, None, None, school)
+            reference = Reference(entry_type, key, title, author, year, None, None, school)
         elif entry_type == 'tutkimusraportti':
             institution = self._io.read("Organisaatio: ")
-            reference = Reference(entry_type, id, title, author, year, None, None, None, institution)
+            reference = Reference(entry_type, key, title, author,
+            year, None, None, None, institution)
         else:
             note = self._io.read("Kommentti: ")
-            reference = Reference(entry_type, id, title, author, year, None, None, None, None, note)
-        self._io.write("Lisätään " + reference.__str__())
+            reference = Reference(entry_type, key, title, author,
+            year, None, None, None, None, note)
+        self._io.write("Lisätään " + str(reference))
         entry = reference.create_bibtex_entry()
         if self._bibhandler.write_to_bib_file_humanformat_new(entry, self.filename):
             self._io.write("BibTex tiedoston kirjoittaminen onnistui")
