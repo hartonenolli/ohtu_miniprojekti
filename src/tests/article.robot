@@ -5,7 +5,7 @@ Resource  resource.robot
 Add One Article
     Input Start App
     Input Human Format
-    Add Reference Article  Matti15  Hieno artikkeli, vai onko?  Matti Meikäläinen  2015  Parasjulkaisu
+    Add Reference  Matti15  Hieno artikkeli, vai onko?  Matti Meikäläinen  2015  Parasjulkaisu
     Input  poistu
     Run App
     Output Should Contain  Lisätään Matti Meikäläinen. 2015. Hieno artikkeli, vai onko?. Parasjulkaisu.
@@ -21,7 +21,7 @@ Add Bibtex Article
 List Article
     Input Start App
     Input Human Format
-    Add Reference Article  Matti16  Hienon artikkelin jatko-osa: Uusi Toivo  Matti Meikäläinen  2016  Parasjulkaisu
+    Add Reference  Matti16  Hienon artikkelin jatko-osa: Uusi Toivo  Matti Meikäläinen  2016  Parasjulkaisu
     Input  listaa viitteet
     Input  poistu
     Run App

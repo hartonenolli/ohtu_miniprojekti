@@ -5,7 +5,7 @@ Resource  resource.robot
 Add One Book
     Input Start App
     Input Human Format
-    Add Reference Book  Kalle11  Kivakirja  Kalle Kirjailija  2011  Kaverijulkaisu
+    Add Reference  Kalle11  Kivakirja  Kalle Kirjailija  2011  Kaverijulkaisu
     Input  poistu
     Run App
     Output Should Contain  Lisätään Kalle Kirjailija. 2011. Kivakirja. Kaverijulkaisu.
@@ -21,7 +21,7 @@ Add Bibtex Book
 List Book
     Input Start App
     Input Human Format
-    Add Reference Book  Kalle12  Kivakirja osa 2  Kalle Kirjailija  2012  Kaverijulkaisu
+    Add Reference  Kalle12  Kivakirja osa 2  Kalle Kirjailija  2012  Kaverijulkaisu
     Input  listaa viitteet
     Input  poistu
     Run App
