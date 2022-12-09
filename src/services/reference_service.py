@@ -2,9 +2,10 @@ from entities.book import Book
 from entities.reference import Reference
 
 class ReferenceServices:
-    def __init__(self, io, bibhandler):
+    def __init__(self, io, bibhandler, filename):
         self._io = io
         self._bibhandler = bibhandler
+        self.filename = filename
         
     def add_reference_humanformat(self, reference):
         self._io.write("Syötä viitteen tiedot:")
@@ -23,7 +24,7 @@ class ReferenceServices:
         self._io.write(text)
 
         data = (reference, title, author, year, publisher, keyword)
-        if self._bibhandler.write_to_bib_file_humanformat(data,"references.bib"):
+        if self._bibhandler.write_to_bib_file_humanformat(data, self.filename):
             self._io.write("BibTex tiedoston kirjoittaminen onnistui")
         else:
             self._io.write("BibTex tiedoston kirjoittaminen epäonnistui")
@@ -33,13 +34,13 @@ class ReferenceServices:
 
     def add_reference_bibtexformat(self):
         bibtex = self._io.read_bibtex("Syötä kirjan bibtex: ")
-        if self._bibhandler.write_to_bib_file_bibtexformat(bibtex, "references.bib"):
+        if self._bibhandler.write_to_bib_file_bibtexformat(bibtex, self.filename):
             self._io.write("BibTex tiedoston kirjoittaminen onnistui")
         else:
             self._io.write("BibTex tiedoston kirjoittaminen epäonnistui")
 
     def list_references(self):
-        references = self._bibhandler.read_from_bib_file("references.bib")
+        references = self._bibhandler.read_from_bib_file(self.filename)
         refs = []
         for entry in references.entries:
             book = Book(entry["author"], entry["title"], entry["publisher"], entry["year"])
@@ -77,7 +78,7 @@ class ReferenceServices:
             reference = Reference(entry_type, id, title, author, year, None, None, None, None, note)
         self._io.write("Lisätään " + reference.__str__())
         entry = reference.create_bibtex_entry()
-        if self._bibhandler.write_to_bib_file_humanformat_new(entry, "references.bib"):
+        if self._bibhandler.write_to_bib_file_humanformat_new(entry, self.filename):
             self._io.write("BibTex tiedoston kirjoittaminen onnistui")
         else:
             self._io.write("BibTex tiedoston kirjoittaminen epäonnistui")

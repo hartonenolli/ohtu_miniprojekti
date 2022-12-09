@@ -35,7 +35,7 @@ class AppLibrary():
     def __init__(self):
         self._io = StubIO()
         self._bibhandler = BibtexHandler()
-        self._ref_service = ReferenceServices(self._io, self._bibhandler)
+        self._ref_service = ReferenceServices(self._io, self._bibhandler, "robottest.bib")
         self._app = CommandLineUI(self._io, self._ref_service)
 
     def input(self, value):

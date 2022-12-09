@@ -27,6 +27,7 @@ class StubIO:
 class TestCommandLineUI(unittest.TestCase):
     def setUp(self):
         self.bibhandler_mock = Mock(wraps=BibtexHandler())
+        self.filename = "test.bib"
 
     def test_user_input_exit_works(self):
         io = StubIO(["poistu"])
@@ -37,7 +38,7 @@ class TestCommandLineUI(unittest.TestCase):
 
     def test_add_reference_humanformat_calls_right_function(self):
         io = StubIO(["lisää viite", "ihmisluettava", "kirja","Sinuhe Egyptiläinen", "Mika Waltari", "1945", "WSOY", "Waltari45", "poistu"])
-        self.service_mock = Mock(wraps=ReferenceServices(io, self.bibhandler_mock))
+        self.service_mock = Mock(wraps=ReferenceServices(io, self.bibhandler_mock, self.filename))
         self.app = CommandLineUI(io, self.service_mock)
         self.app.start_app()
 
@@ -45,7 +46,7 @@ class TestCommandLineUI(unittest.TestCase):
 
     def test_add_reference_bibtexformat_calls_right_function(self):
         io = StubIO(["lisää viite", "bibtex", "kirja","testisyöte", "poistu"])
-        self.service_mock = Mock(wraps=ReferenceServices(io, self.bibhandler_mock))
+        self.service_mock = Mock(wraps=ReferenceServices(io, self.bibhandler_mock, self.filename))
         self.app = CommandLineUI(io, self.service_mock)
         self.app.start_app()
 
@@ -53,7 +54,7 @@ class TestCommandLineUI(unittest.TestCase):
 
     def test_list_references_with_empty_file_returns_correct_output(self):
         io = StubIO(["listaa viitteet", "poistu"])
-        self.service_mock = Mock(wraps=ReferenceServices(io, self.bibhandler_mock))
+        self.service_mock = Mock(wraps=ReferenceServices(io, self.bibhandler_mock, self.filename))
         self.app = CommandLineUI(io, self.service_mock)
         self.service_mock.list_references.return_value = None
         self.app.start_app()
@@ -62,7 +63,7 @@ class TestCommandLineUI(unittest.TestCase):
 
     def test_list_references_with_non_empty_file_returns_correct_output(self):
         io = StubIO(["listaa viitteet", "poistu"])
-        self.service_mock = Mock(wraps=ReferenceServices(io, self.bibhandler_mock))
+        self.service_mock = Mock(wraps=ReferenceServices(io, self.bibhandler_mock, self.filename))
         self.app = CommandLineUI(io, self.service_mock)
         self.service_mock.list_references.return_value = ["testi1", "testi2"]
         self.app.start_app()

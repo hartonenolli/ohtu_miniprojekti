@@ -30,24 +30,25 @@ class StubData:
 class TestReferenceServices(unittest.TestCase):
     def setUp(self):
         self.bibhandler_mock = Mock(wraps=BibtexHandler())
+        self.filename = "test.bib"
 
     def test_add_reference_humanformat_works_with_correct_year_format(self):
         io = StubIO(["Sinuhe Egyptiläinen", "Mika Waltari", "1945", "WSOY", "avainsana"])
-        ref_service = ReferenceServices(io, self.bibhandler_mock)
+        ref_service = ReferenceServices(io, self.bibhandler_mock, self.filename)
         ref_service.add_reference_humanformat("kirja")
 
         self.assertEqual(io.outputs[-1], "BibTex tiedoston kirjoittaminen onnistui")
 
     def test_add_reference_humanformat_returns_error_output_with_incorrect_year_format(self):
         io = StubIO(["Sinuhe Egyptiläinen", "Mika Waltari", "aaa", "1945", "WSOY", "avainsana"])
-        ref_service = ReferenceServices(io, self.bibhandler_mock)
+        ref_service = ReferenceServices(io, self.bibhandler_mock, self.filename)
         ref_service.add_reference_humanformat("kirja")
 
         self.assertEqual(io.outputs[-3], "Virheellinen syöte")
 
     def test_add_reference_humanformat_returns_correct_output_when_writing_to_file_does_not_succeed(self):
         io = StubIO(["Sinuhe Egyptiläinen", "Mika Waltari", "1945", "WSOY", "avainsana"])
-        ref_service = ReferenceServices(io, self.bibhandler_mock)
+        ref_service = ReferenceServices(io, self.bibhandler_mock, self.filename)
         
         self.bibhandler_mock.write_to_bib_file_humanformat.return_value = False
         ref_service.add_reference_humanformat("kirja")
@@ -56,7 +57,7 @@ class TestReferenceServices(unittest.TestCase):
 
     def test_add_reference_bibtexformat_returns_correct_output_when_writing_to_file_successful(self):
         io = StubIO(["testi"])
-        ref_service = ReferenceServices(io, self.bibhandler_mock)
+        ref_service = ReferenceServices(io, self.bibhandler_mock, self.filename)
 
         self.bibhandler_mock.write_to_bib_file_bibtexformat.return_value = True
         ref_service.add_reference_bibtexformat()
@@ -66,7 +67,7 @@ class TestReferenceServices(unittest.TestCase):
 
     def test_add_reference_bibtexformat_returns_correct_output_when_writing_to_file_failed(self):
         io = StubIO(["testi"])
-        ref_service = ReferenceServices(io, self.bibhandler_mock)
+        ref_service = ReferenceServices(io, self.bibhandler_mock, self.filename)
 
         self.bibhandler_mock.write_to_bib_file_bibtexformat.return_value = False
         ref_service.add_reference_bibtexformat()
@@ -76,7 +77,7 @@ class TestReferenceServices(unittest.TestCase):
 
     def test_list_references_calls_correct_handler_method(self):
         io = StubIO([])
-        ref_service = ReferenceServices(io, self.bibhandler_mock)
+        ref_service = ReferenceServices(io, self.bibhandler_mock, self.filename)
         ref_service.list_references()
 
         self.assertEqual(self.bibhandler_mock.read_from_bib_file.call_count, 1)
@@ -89,7 +90,7 @@ class TestReferenceServices(unittest.TestCase):
             "year": "4"
         }])
         io = StubIO([])
-        ref_service = ReferenceServices(io, self.bibhandler_mock)
+        ref_service = ReferenceServices(io, self.bibhandler_mock, self.filename)
         self.bibhandler_mock.read_from_bib_file.return_value = data
         
         self.assertEqual(ref_service.list_references()[0].__str__(), "1, 2. 3, 4.")
