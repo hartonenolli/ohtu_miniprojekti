@@ -16,8 +16,8 @@ Add Reference BibTex
     Input  ${bibtex}
 
 Add Reference
-    [Arguments]  ${avainsana}  ${nimi}  ${kirjailija}  ${julkaisuvuosi}  ${julkaisija}
-    Input  kirja
+    [Arguments]  ${tyyppi}  ${avainsana}  ${nimi}  ${kirjailija}  ${julkaisuvuosi}  ${julkaisija}
+    Input  ${tyyppi}
     Input  ${avainsana}
     Input  ${nimi}
     Input  ${kirjailija}
