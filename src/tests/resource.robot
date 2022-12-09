@@ -15,9 +15,18 @@ Add Reference BibTex
     [Arguments]  ${bibtex}
     Input  ${bibtex}
 
-Add Reference
-    [Arguments]  ${kirja}  ${avainsana}  ${nimi}  ${kirjailija}  ${julkaisuvuosi}  ${julkaisija}
-    Input  ${kirja}
+Add Reference Book
+    [Arguments]  ${avainsana}  ${nimi}  ${kirjailija}  ${julkaisuvuosi}  ${julkaisija}
+    Input  kirja
+    Input  ${avainsana}
+    Input  ${nimi}
+    Input  ${kirjailija}
+    Input  ${julkaisuvuosi}
+    Input  ${julkaisija}
+
+Add Reference Article
+    [Arguments]  ${avainsana}  ${nimi}  ${kirjailija}  ${julkaisuvuosi}  ${julkaisija}
+    Input  lehtiartikkeli
     Input  ${avainsana}
     Input  ${nimi}
     Input  ${kirjailija}
