@@ -40,14 +40,14 @@ class CommandLineUI:
                     'choices': ['kirja','lehtiartikkeli','gradu','tutkimusraportti','julkaisematon']
                     }
                     entry_type = self._io.read_pyinquirer(add_input)
-                    self._service.add_reference_humanformat_new(entry_type['add input'])
+                    self._service.add_reference_humanformat(entry_type['add input'])
 
                 elif user_input['add input'] == "bibtex":
                     self._service.add_reference_bibtexformat()
 
 
             elif user_input['start input'] == "listaa viitteet":
-                referencelist = self._service.list_references_new()
+                referencelist = self._service.list_references()
                 if referencelist:
                     for reference in referencelist:
                         self._io.write(reference)

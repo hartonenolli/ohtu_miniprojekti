@@ -1,7 +1,6 @@
 import unittest
 from tempfile import NamedTemporaryFile
 from ui.app import CommandLineUI
-from entities.book import Book
 from unittest.mock import Mock
 from services.reference_service import ReferenceServices
 from repositories.datahandler import BibtexHandler
@@ -39,7 +38,7 @@ class TestCommandLineUI(unittest.TestCase):
         self.assertEqual(self.app._run, False)
 
     def test_add_reference_humanformat_calls_right_function(self):
-        io = StubIO(["lisää viite", "ihmisluettava", "kirja","Sinuhe Egyptiläinen", "Mika Waltari", "1945", "WSOY", "Waltari45", "poistu"])
+        io = StubIO(["lisää viite", "ihmisluettava", "kirja", "Waltari45", "Sinuhe Egyptiläinen", "Mika Waltari", "1945", "WSOY", "poistu"])
         self.service_mock = Mock(wraps=ReferenceServices(io, self.bibhandler_mock, self.filename))
         self.app = CommandLineUI(io, self.service_mock)
         self.app.start_app()
@@ -47,7 +46,7 @@ class TestCommandLineUI(unittest.TestCase):
         self.assertEqual(self.service_mock.add_reference_humanformat.call_count, 1)
 
     def test_add_reference_bibtexformat_calls_right_function(self):
-        io = StubIO(["lisää viite", "bibtex", "kirja","testisyöte", "poistu"])
+        io = StubIO(["lisää viite", "bibtex", "kirja", "testisyöte", "poistu"])
         self.service_mock = Mock(wraps=ReferenceServices(io, self.bibhandler_mock, self.filename))
         self.app = CommandLineUI(io, self.service_mock)
         self.app.start_app()
