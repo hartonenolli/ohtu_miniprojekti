@@ -24,7 +24,7 @@ class FilterService():
     
     def filter_by_author(self, bib_database, author : str):
         bib_result_database = BibDatabase()
-        bib_result_database.entries = [n for n in bib_database.entries if ["author"].lower() == author.lower()]
+        bib_result_database.entries = [n for n in bib_database.entries if n["author"].lower() == author.lower()]
         return bib_result_database
 
     def sort_by_title(self, bib_database, descending=False):
@@ -36,7 +36,7 @@ class FilterService():
     
     def filter_by_title(self, bib_database, title : str):
         bib_result_database = BibDatabase()
-        bib_result_database.entries = [n for n in bib_database.entries if ["title"].lower() == title.lower()]
+        bib_result_database.entries = [n for n in bib_database.entries if n["title"].lower() == title.lower()]
         return bib_result_database 
 
     def sort_by_publisher(self, bib_database, descending=False):
@@ -48,7 +48,7 @@ class FilterService():
     
     def filter_by_publisher(self, bib_database, publisher : str):
         bib_result_database = BibDatabase()
-        bib_result_database.entries = [n for n in bib_database.entries if ["publisher"].lower() == publisher.lower()]
+        bib_result_database.entries = [n for n in bib_database.entries if n["publisher"].lower() == publisher.lower()]
         return bib_result_database 
 
     def sort_by_entrytype(self, bib_database, descending=False):
@@ -60,5 +60,5 @@ class FilterService():
     
     def filter_by_entrytype(self, bib_database, entrytype : str):
         bib_result_database = BibDatabase()
-        bib_result_database.entries = [n for n in bib_database.entries if ["ENTRYTYPE"].lower() == entrytype.lower()]
+        bib_result_database.entries = [n for n in bib_database.entries if n["ENTRYTYPE"].lower() == entrytype.lower()]
         return bib_result_database 

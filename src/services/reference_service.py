@@ -1,10 +1,12 @@
 from entities.reference import Reference
 
 class ReferenceServices:
-    def __init__(self, io, bibhandler, filename):
+    def __init__(self, io, bibhandler, filename, filterservice):
         self._io = io
         self._bibhandler = bibhandler
         self.filename = filename
+        self.filterservice = filterservice
+
 
     def delete_reference(self,reference):
         pass
@@ -17,9 +19,14 @@ class ReferenceServices:
             self._io.write("BibTex tiedoston kirjoittaminen epäonnistui")
 
 
+    def write_references(self, referencelist):
+        if referencelist:
+            for reference in referencelist:
+                self._io.write(str(reference))
+        else:
+            self._io.write("Viitekirjasto on tyhjä.")
 
-    def list_references(self):
-        references = self._bibhandler.read_from_bib_file(self.filename)
+    def list_references(self, references):
         refs = []
         for entry in references.entries:
             if entry["ENTRYTYPE"] == "book":
@@ -41,7 +48,7 @@ class ReferenceServices:
                 reference = Reference("julkaisematon", entry["ID"], entry["title"],
                 entry["author"], entry["year"], None, None, None, None, entry["note"])
             refs.append(reference)
-        return refs
+        self.write_references(refs)
 
     def add_reference_humanformat(self, entry_type):
         self._io.write("Syötä viitteen tiedot:")
@@ -72,3 +79,49 @@ class ReferenceServices:
             self._io.write("BibTex tiedoston kirjoittaminen onnistui")
         else:
             self._io.write("BibTex tiedoston kirjoittaminen epäonnistui")
+
+    def filter_references(self, basis):
+
+        keyword = self._io.read("Syötä hakusana: ")
+        references = self._bibhandler.read_from_bib_file(self.filename)
+        if basis == 'vuoden':
+            references = self.filterservice.filter_by_year(references, int(keyword))
+
+        elif basis == 'tekijän':
+            references = self.filterservice.filter_by_author(references, keyword)
+
+        elif basis == 'julkaisijan':
+            references = self.filterservice.filter_by_publisher(references, keyword)
+
+        elif basis == 'viitetyypin':
+            references = self.filterservice.filter_by_entrytype(references, keyword)
+
+        else:
+            references = self.filterservice.filter_by_title(references, keyword)
+
+        self.list_references(references)
+
+    def sort_references(self, basis):
+
+        references = self._bibhandler.read_from_bib_file(self.filename)
+        if basis == 'lisäysjärjestys':
+            self.list_references(references)
+        else:
+            keyword = self._io.read("Syötä hakusana: ")
+
+            if basis == 'vuoden':
+                references = self.filterservice.sort_by_year(references, int(keyword))
+
+            elif basis == 'tekijän':
+                references = self.filterservice.sort_by_author(references, keyword)
+
+            elif basis == 'julkaisijan':
+                references = self.filterservice.sort_by_publisher(references, keyword)
+
+            elif basis == 'viitetyypin':
+                references = self.filterservice.sort_by_entrytype(references, keyword)
+
+            elif basis == 'nimen':
+                references = self.filterservice.sort_by_title(references, keyword)
+
+            self.list_references(references) 

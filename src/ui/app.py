@@ -18,7 +18,7 @@ class CommandLineUI:
                 'type': 'list',
                 'name': 'start input',
                 'message': 'Mitä haluat tehdä?',
-                'choices': ['lisää viite','listaa viitteet','poistu']
+                'choices': ['lisää viite','listaa viitteet', 'etsi viitteitä', 'poistu']
                 }
             user_input = self._io.read_pyinquirer(start_input)
 
@@ -47,12 +47,25 @@ class CommandLineUI:
 
 
             elif user_input['start input'] == "listaa viitteet":
-                referencelist = self._service.list_references()
-                if referencelist:
-                    for reference in referencelist:
-                        self._io.write(str(reference))
-                else:
-                    self._io.write("Viitekirjasto on tyhjä.")
+                add_input =  {
+                'type': 'list',
+                'name': 'add input',
+                'message': 'Millä perusteella haluaisit listata viitteitä?',
+                'choices': ['lisäysjärjestys', 'vuoden', 'tekijän', 'julkaisijan', 'viitetyypin', 'nimen']
+                }
+                entry_type = self._io.read_pyinquirer(add_input)
+                self._service.sort_references(entry_type['add input'])
+
+            elif user_input['start input'] == 'etsi viitteitä':
+                add_input =  {
+                'type': 'list',
+                'name': 'add input',
+                'message': 'Millä perusteella haluaisit etsiä viitteitä?',
+                'choices': ['vuoden', 'tekijän', 'julkaisijan', 'viitetyypin', 'nimen']
+                }
+                entry_type = self._io.read_pyinquirer(add_input)
+                self._service.filter_references(entry_type['add input'])
+
 
             elif user_input['start input'] == "poistu":
                 self._run = False
