@@ -23,6 +23,7 @@ List Book
     Input Human Format
     Add Reference  kirja  Kalle12  Kivakirja osa 2  Kalle Kirjailija  2012  Kaverijulkaisu
     Input  listaa viitteet
+    Input  lisäysjärjestys
     Input  poistu
     Run App
     Output Should Contain  Kalle Kirjailija. 2012. Kivakirja osa 2. Kaverijulkaisu.

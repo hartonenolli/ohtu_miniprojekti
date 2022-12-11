@@ -23,6 +23,7 @@ List Unpublished
     Input Human Format
     Add Reference  julkaisematon  Matti16  julkaisematon  Matti Meikäläinen  2016  Parasjulkaisu
     Input  listaa viitteet
+    Input  lisäysjärjestys
     Input  poistu
     Run App
     Output Should Contain  Matti Meikäläinen. 2016. julkaisematon. Parasjulkaisu.

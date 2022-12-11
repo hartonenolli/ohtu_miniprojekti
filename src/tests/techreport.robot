@@ -23,6 +23,7 @@ List Tech Report
     Input Human Format
     Add Reference  tutkimusraportti  Teemu22  Raportti osa 2  Teemu Virtanen  2022  Organisaatio
     Input  listaa viitteet
+    Input  lisäysjärjestys
     Input  poistu
     Run App
     Output Should Contain  Lisätään Teemu Virtanen. 2022. Raportti osa 2. Organisaatio.

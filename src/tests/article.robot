@@ -23,6 +23,7 @@ List Article
     Input Human Format
     Add Reference  lehtiartikkeli  Matti16  Hienon artikkelin jatko-osa: Uusi Toivo  Matti Meikäläinen  2016  Parasjulkaisu
     Input  listaa viitteet
+    Input  lisäysjärjestys
     Input  poistu
     Run App
     Output Should Contain  Matti Meikäläinen. 2016. Hienon artikkelin jatko-osa: Uusi Toivo. Parasjulkaisu.

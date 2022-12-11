@@ -23,6 +23,7 @@ List Thesis
     Input Human Format
     Add Reference  gradu  Matti16  Gradu  Matti Meikäläinen  2016  HY
     Input  listaa viitteet
+    Input  lisäysjärjestys
     Input  poistu
     Run App
     Output Should Contain  Matti Meikäläinen. 2016. Gradu. HY.
