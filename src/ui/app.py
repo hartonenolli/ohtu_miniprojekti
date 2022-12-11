@@ -42,7 +42,7 @@ class CommandLineUI:
                     entry_type = self._io.read_pyinquirer(add_input)
                     self._service.add_reference_humanformat(entry_type['add input'])
 
-                elif user_input['add input'] == "bibtex":
+                else:
                     self._service.add_reference_bibtexformat()
 
 

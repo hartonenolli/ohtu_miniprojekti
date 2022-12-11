@@ -121,7 +121,7 @@ class ReferenceServices:
             elif basis == 'viitetyypin':
                 references = self.filterservice.sort_by_entrytype(references, keyword)
 
-            elif basis == 'nimen':
+            else:
                 references = self.filterservice.sort_by_title(references, keyword)
 
-            self.list_references(references) 
+            self.list_references(references)
