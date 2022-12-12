@@ -102,7 +102,6 @@ class ReferenceServices:
         self.list_references(references)
 
     def sort_references(self, basis):
-
         references = self._bibhandler.read_from_bib_file(self.filename)
         if basis == 'lisäysjärjestys':
             self.list_references(references)
@@ -125,3 +124,17 @@ class ReferenceServices:
                 references = self.filterservice.sort_by_title(references, keyword)
 
             self.list_references(references)
+
+    def add_to_new_file(self):
+        references = self._bibhandler.read_from_bib_file(self.filename)
+        refs = []
+        for entry in references.entries:
+            if entry["ENTRYTYPE"] == "book":
+                reference = Reference("kirja", entry["ID"], entry["title"],
+                entry["author"], entry["year"], entry["publisher"])
+                print(reference)
+                user_input = input("Lisää viite? y/n   ")
+                if user_input == "y":
+                    refs.append(reference)
+        print("Lisätyty viitteet tiedostoon:")
+        self.write_references(refs)
