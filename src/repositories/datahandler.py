@@ -2,6 +2,7 @@ import bibtexparser
 from bibtexparser.bwriter import BibTexWriter
 from bibtexparser.bparser import BibTexParser
 
+
 class BibtexHandler:
     def __init__(self):
         pass
@@ -29,7 +30,6 @@ class BibtexHandler:
             return bib_database
         except PermissionError:
             return None
-
 
     def write_to_bib_file_humanformat(self, entry, file):
         writer = BibTexWriter()
