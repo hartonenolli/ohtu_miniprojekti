@@ -51,3 +51,13 @@ class AppLibrary():
         outputs = self._io.outputs
         if not value in outputs:
             raise AssertionError(f"Output \"{value}\" is not in {str(outputs)}")
+    
+    def first_output_filter(self, value):
+        outputs = self._io.outputs
+        if value != outputs[6]:
+            raise AssertionError(f"Not same")
+    
+    def output_should_not_contain(self, value):
+        outputs = self._io.outputs
+        if value in outputs:
+            raise AssertionError(f"Output \"{value}\" is in {str(outputs)}")
