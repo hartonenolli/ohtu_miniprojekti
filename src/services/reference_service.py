@@ -10,7 +10,6 @@ class ReferenceServices:
         self.filename = filename
         self.filterservice = filterservice
 
-
     def delete_reference(self,reference):
         pass
 
@@ -20,7 +19,6 @@ class ReferenceServices:
             self._io.write("BibTex tiedoston kirjoittaminen onnistui")
         else:
             self._io.write("BibTex tiedoston kirjoittaminen epäonnistui")
-
 
     def write_references(self, referencelist):
         if referencelist:
@@ -92,7 +90,6 @@ class ReferenceServices:
             self._io.write("BibTex tiedoston kirjoittaminen epäonnistui")
 
     def filter_references(self, basis):
-
         keyword = self._io.read("Syötä hakusana: ")
         references = self._bibhandler.read_from_bib_file(self.filename)
         if basis == 'vuoden':
@@ -110,7 +107,6 @@ class ReferenceServices:
         else:
             references = self.filterservice.filter_by_title(references, keyword)
 
-        
         self.write_references(self.list_references(references))
 
     def sort_references(self, basis):
@@ -168,7 +164,6 @@ class ReferenceServices:
             else:
                 self._io.write(f"{str(reference)} lisääminen epäonnistui")
 
-    
     def all_references(self):
         references = self._bibhandler.read_from_bib_file(self.filename)
         references = self.list_references(references)
@@ -176,5 +171,3 @@ class ReferenceServices:
         for refererence in references:
             refs.append({'name' : refererence})
         return refs
-
-

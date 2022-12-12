@@ -1,4 +1,6 @@
 from bibtexparser.bibdatabase import BibDatabase
+
+
 class FilterService():
     def __init__(self) -> None:
         pass

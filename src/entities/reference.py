@@ -1,5 +1,6 @@
 from bibtexparser.bibdatabase import BibDatabase
 
+
 class Reference:
     def __init__(self, ref_type, key, title, author, year=None,
     publisher=None, journal=None, school=None, institution=None, note=None):
