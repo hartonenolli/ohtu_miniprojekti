@@ -125,14 +125,17 @@ class ReferenceServices:
 
     def add_to_new_file(self):
         references = self._bibhandler.read_from_bib_file(self.filename)
-        refs = []
+        new_file_name = self._io.read("Uuden tiedoston nimi: ")
+        new_file_name = new_file_name + ".bib"
         for entry in references.entries:
             if entry["ENTRYTYPE"] == "book":
                 reference = Reference("kirja", entry["ID"], entry["title"],
                 entry["author"], entry["year"], entry["publisher"])
-                print(reference)
-                user_input = input("Lisää viite? y/n   ")
+                self._io.write(reference)
+                user_input = self._io.read("Lisää viite? y/n   ")
                 if user_input == "y":
-                    refs.append(reference)
-        print("Lisätyty viitteet tiedostoon:")
-        self.write_references(refs)
+                    entry = reference.create_bibtex_entry()
+                    if self._bibhandler.write_to_bib_file_humanformat(entry, new_file_name):
+                        self._io.write("BibTex tiedoston lisääminen onnistui")
+                    else:
+                        self._io.write("BibTex tiedoston lisääminen epäonnistui")
