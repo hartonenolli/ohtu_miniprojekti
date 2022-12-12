@@ -63,13 +63,13 @@ class Reference:
 
     def __str__(self):
         if self._type == 'kirja':
-            return f"{self._author}. {self._year}. {self._title}. {self._publisher}."
+            return f"{self._type}. {self._id}. {self._author}. {self._year}. {self._title}. {self._publisher}. "
         if self._type == 'lehtiartikkeli':
-            return f"{self._author}. {self._year}. {self._title}. {self._journal}."
+            return f"{self._type}. {self._id}. {self._author}. {self._year}. {self._title}. {self._journal}. "
         if self._type == 'gradu':
-            return f"{self._author}. {self._year}. {self._title}. {self._school}."
+            return f"{self._type}. {self._id}. {self._author}. {self._year}. {self._title}. {self._school}. "
         if self._type == 'tutkimusraportti':
-            return f"{self._author}. {self._year}. {self._title}. {self._institution}."
+            return f"{self._type}. {self._id}. {self._author}. {self._year}. {self._title}. {self._institution}. "
         if self._year is not None:
-            return f"{self._author}. {self._year}. {self._title}. {self._note}."
-        return f"{self._author}. {self._title}. {self._note}."
+            return f"{self._type}. {self._id}. {self._author}. {self._year}. {self._title}. {self._note}. "
+        return f"{self._type}. {self._id}. {self._author}. {self._title}. {self._note}. "

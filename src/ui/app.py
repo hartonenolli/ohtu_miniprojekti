@@ -1,5 +1,6 @@
 import os
 from os import name
+import PyInquirer
 
 class CommandLineUI:
     def __init__(self, io, service):
@@ -66,17 +67,25 @@ class CommandLineUI:
                 entry_type = self._io.read_pyinquirer(add_input)
                 self._service.filter_references(entry_type['add input'])
 
-            elif user_input['start_input'] == 'poista viite':
+            elif user_input['start input'] == 'poista viite':
                 add_input =  {
                 'type': 'checkbox',
                 'qmark': 'X',
                 'name': 'delete',
                 'message': 'Mitkä viitteet poistetaan?',
-                'choices': [self._service.list_reference]
+                'choices': [self._service.list_references]
                 }
 
             elif user_input['start input'] == 'siirrä viitteitä tiedostoon':
-                self._service.add_to_new_file()
+                add_input =  {
+                'type': 'checkbox',
+                'qmark': 'X',
+                'name': 'add input',
+                'message': 'Mitkä viitteet poistetaan?',
+                'choices':  self._service.all_references()
+                }
+                entry_type = self._io.read_pyinquirer(add_input)
+                self._service.add_to_new_file(entry_type['add input'])
 
             elif user_input['start input'] == "poistu":
                 self._run = False

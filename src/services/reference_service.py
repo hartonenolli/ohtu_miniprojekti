@@ -1,3 +1,5 @@
+from os import path, remove
+
 from entities.reference import Reference
 
 
@@ -23,7 +25,7 @@ class ReferenceServices:
     def write_references(self, referencelist):
         if referencelist:
             for reference in referencelist:
-                self._io.write(str(reference))
+                self._io.write(reference)
         else:
             self._io.write("Viitekirjasto on tyhjä.")
 
@@ -48,9 +50,8 @@ class ReferenceServices:
             else:
                 reference = Reference("julkaisematon", entry["ID"], entry["title"],
                 entry["author"], entry["year"], None, None, None, None, entry["note"])
-            refs.append(reference)
+            refs.append(str(reference))
         return refs
-        #self.write_references(refs)
 
     def add_reference_humanformat(self, entry_type):
         self._io.write("Syötä viitteen tiedot:")
@@ -133,21 +134,47 @@ class ReferenceServices:
                 references = self.filterservice.sort_by_title(references)
 
             self.write_references(self.list_references(references))
-            self.list_references(references)
 
-    def add_to_new_file(self):
+    def add_to_new_file(self, references):
+        while True:
+            new_file_name = self._io.read("Uuden tiedoston nimi: ")
+            new_file_name = new_file_name + ".bib"
+            if new_file_name != "references.bib":
+                break
+            self._io.write("Kokeile toista tiedoston nimeä")
+
+        if path.isfile(new_file_name):
+            remove(new_file_name)
+
+        for entry in references:
+            entry = entry.split(". ")
+            if entry[0] == 'kirja':
+                reference = Reference(entry[0], entry[1], entry[2], entry[4], entry[3], entry[5])
+            elif entry[0] == 'lehtiartikkeli':
+                reference = Reference(entry[0], entry[1], entry[2], entry[4], entry[3], None, entry[5])
+            elif entry[0] == 'gradu':
+                reference = Reference(entry[0], entry[1], entry[2], entry[4], entry[3], None, None, entry[5])
+            elif entry[0] == 'tutkimusraportti':
+                reference = Reference(entry[0], entry[1], entry[2], entry[4],
+                entry[3], None, None, None, entry[5])
+            else:
+                reference = Reference(entry[0], entry[1], entry[2], entry[4],
+                entry[3], None, None, None, None, entry[5])
+
+            entry = reference.create_bibtex_entry()
+
+            if self._bibhandler.write_to_bib_file_humanformat(entry, new_file_name):
+                self._io.write(f"{str(reference)} lisääminen onnistui")
+            else:
+                self._io.write(f"{str(reference)} lisääminen epäonnistui")
+
+    
+    def all_references(self):
         references = self._bibhandler.read_from_bib_file(self.filename)
-        new_file_name = self._io.read("Uuden tiedoston nimi: ")
-        new_file_name = new_file_name + ".bib"
-        for entry in references.entries:
-            if entry["ENTRYTYPE"] == "book":
-                reference = Reference("kirja", entry["ID"], entry["title"],
-                entry["author"], entry["year"], entry["publisher"])
-                self._io.write(reference)
-                user_input = self._io.read("Lisää viite? y/n   ")
-                if user_input == "y":
-                    entry = reference.create_bibtex_entry()
-                    if self._bibhandler.write_to_bib_file_humanformat(entry, new_file_name):
-                        self._io.write("BibTex tiedoston lisääminen onnistui")
-                    else:
-                        self._io.write("BibTex tiedoston lisääminen epäonnistui")
+        references = self.list_references(references)
+        refs = []
+        for refererence in references:
+            refs.append({'name' : refererence})
+        return refs
+
+
