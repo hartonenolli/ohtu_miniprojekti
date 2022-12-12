@@ -35,7 +35,7 @@ class FilterService():
         bib_result_database.entries = [n for n in bib_database.entries
         if n["ENTRYTYPE"].lower() == entrytype.lower()]
         return bib_result_database
- 
+
     def sort_by(self, bib_database, sort_keyword, descending=False):
         if descending:
             bib_database.entries.sort(key= lambda x : x[sort_keyword], reverse=True)

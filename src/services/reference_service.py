@@ -17,25 +17,30 @@ class ReferenceServices:
             for reference in references:
                 try:
                     all_references.remove({'name': reference})
-                except Exception:
+                except ValueError:
                     self._io.write(f"Viiteen {reference} poisto epäonnistui.")
 
             entries = []
             for i in all_references:
-                for key, entry in i.items():
+                for entry in i.values():
                     entry = entry.split(". ")
                     if entry[0] == 'kirja':
-                        reference = Reference(entry[0], entry[1], entry[2], entry[4], entry[3], entry[5])
+                        reference = Reference(
+                            entry[0],entry[1], entry[2], entry[4], entry[3], entry[5])
                     elif entry[0] == 'lehtiartikkeli':
-                        reference = Reference(entry[0], entry[1], entry[2], entry[4], entry[3], None, entry[5])
+                        reference = Reference(
+                            entry[0], entry[1], entry[2], entry[4], entry[3], None, entry[5])
                     elif entry[0] == 'gradu':
-                        reference = Reference(entry[0], entry[1], entry[2], entry[4], entry[3], None, None, entry[5])
+                        reference = Reference(
+                            entry[0], entry[1], entry[2], entry[4], entry[3], None, None, entry[5])
                     elif entry[0] == 'tutkimusraportti':
-                        reference = Reference(entry[0], entry[1], entry[2], entry[4],
+                        reference = Reference(
+                            entry[0], entry[1], entry[2], entry[4],
                         entry[3], None, None, None, entry[5])
                     else:
-                        reference = Reference(entry[0], entry[1], entry[2], entry[4],
-                        entry[3], None, None, None, None, entry[5])
+                        reference = Reference(
+                            entry[0], entry[1], entry[2], entry[4],
+                            entry[3], None, None, None, None, entry[5])
 
                     entries.append(reference.create_bibtex_entry())
 
@@ -85,15 +90,14 @@ class ReferenceServices:
 
     def add_reference_humanformat(self, entry_type):
         self._io.write("Syötä viitteen tiedot:")
-        try_loop = True
-        while try_loop:
+        while True:
             try:
                 key = self._io.read("Avainsana, jolla haluat viitata teokseen: ")
                 title = self._io.read("Nimi: ")
                 author = self._io.read("Kirjoittaja/t: ")
                 if not key or not title or not author:
                     raise ReferenceError
-                try_loop = False
+                break
             except ReferenceError:
                 self._io.write("Viitteellä oltava avainsana, nimi ja kirjoittaja")
         year = self._io.read("Julkaisuvuosi (jätä tyhjäksi jos ei ole): ")
@@ -140,7 +144,7 @@ class ReferenceServices:
         else:
             references = self.filterservice.filter_by_title(references, keyword)
 
-        
+
         self.write_references(self.list_references(references))
 
     def sort_references(self, basis):
@@ -179,17 +183,22 @@ class ReferenceServices:
         for entry in references:
             entry = entry.split(". ")
             if entry[0] == 'kirja':
-                reference = Reference(entry[0], entry[1], entry[2], entry[4], entry[3], entry[5])
+                reference = Reference(
+                    entry[0], entry[1], entry[2], entry[4], entry[3], entry[5])
             elif entry[0] == 'lehtiartikkeli':
-                reference = Reference(entry[0], entry[1], entry[2], entry[4], entry[3], None, entry[5])
+                reference = Reference(
+                    entry[0], entry[1], entry[2], entry[4], entry[3], None, entry[5])
             elif entry[0] == 'gradu':
-                reference = Reference(entry[0], entry[1], entry[2], entry[4], entry[3], None, None, entry[5])
+                reference = Reference(
+                    entry[0], entry[1], entry[2], entry[4], entry[3], None, None, entry[5])
             elif entry[0] == 'tutkimusraportti':
-                reference = Reference(entry[0], entry[1], entry[2], entry[4],
-                entry[3], None, None, None, entry[5])
+                reference = Reference(
+                    entry[0], entry[1], entry[2], entry[4],
+                    entry[3], None, None, None, entry[5])
             else:
-                reference = Reference(entry[0], entry[1], entry[2], entry[4],
-                entry[3], None, None, None, None, entry[5])
+                reference = Reference(
+                    entry[0], entry[1], entry[2], entry[4],
+                    entry[3], None, None, None, None, entry[5])
 
             entry = reference.create_bibtex_entry()
 
@@ -198,7 +207,6 @@ class ReferenceServices:
             else:
                 self._io.write(f"{str(reference)} lisääminen epäonnistui")
 
-    
     def all_references(self):
         references = self._bibhandler.read_from_bib_file(self.filename)
         references = self.list_references(references)
@@ -206,5 +214,3 @@ class ReferenceServices:
         for refererence in references:
             refs.append({'name' : refererence})
         return refs
-
-
