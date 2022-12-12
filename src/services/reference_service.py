@@ -119,19 +119,19 @@ class ReferenceServices:
             self.write_references(self.list_references(references))
         else:
             if basis == 'vuoden':
-                references = self.filterservice.sort_by_year(references)
+                references = self.filterservice.sort_by(references, "year")
 
             elif basis == 'tekijän':
-                references = self.filterservice.sort_by_author(references)
+                references = self.filterservice.sort_by(references, "author")
 
             elif basis == 'julkaisijan':
-                references = self.filterservice.sort_by_publisher(references)
+                references = self.filterservice.sort_by(references, "publisher")
 
             elif basis == 'viitetyypin':
-                references = self.filterservice.sort_by_entrytype(references)
+                references = self.filterservice.sort_by(references, "ENTRYTYPE")
 
             else:
-                references = self.filterservice.sort_by_title(references)
+                references = self.filterservice.sort_by(references, "title")
 
             self.write_references(self.list_references(references))
 
