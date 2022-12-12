@@ -106,22 +106,20 @@ class ReferenceServices:
         if basis == 'lisäysjärjestys':
             self.list_references(references)
         else:
-            keyword = self._io.read("Syötä hakusana: ")
-
             if basis == 'vuoden':
-                references = self.filterservice.sort_by_year(references, int(keyword))
+                references = self.filterservice.sort_by_year(references)
 
             elif basis == 'tekijän':
-                references = self.filterservice.sort_by_author(references, keyword)
+                references = self.filterservice.sort_by_author(references)
 
             elif basis == 'julkaisijan':
-                references = self.filterservice.sort_by_publisher(references, keyword)
+                references = self.filterservice.sort_by_publisher(references)
 
             elif basis == 'viitetyypin':
-                references = self.filterservice.sort_by_entrytype(references, keyword)
+                references = self.filterservice.sort_by_entrytype(references)
 
             else:
-                references = self.filterservice.sort_by_title(references, keyword)
+                references = self.filterservice.sort_by_title(references)
 
             self.list_references(references)
 
