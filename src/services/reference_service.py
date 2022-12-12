@@ -11,8 +11,38 @@ class ReferenceServices:
         self.filterservice = filterservice
 
 
-    def delete_reference(self,reference):
-        pass
+    def delete_reference(self,references):
+        if references:
+            all_references = self.all_references()
+            for reference in references:
+                try:
+                    all_references.remove({'name': reference})
+                except Exception:
+                    self._io.write(f"Viiteen {reference} poisto epäonnistui.")
+
+            entries = []
+            for i in all_references:
+                for key, entry in i.items():
+                    entry = entry.split(". ")
+                    if entry[0] == 'kirja':
+                        reference = Reference(entry[0], entry[1], entry[2], entry[4], entry[3], entry[5])
+                    elif entry[0] == 'lehtiartikkeli':
+                        reference = Reference(entry[0], entry[1], entry[2], entry[4], entry[3], None, entry[5])
+                    elif entry[0] == 'gradu':
+                        reference = Reference(entry[0], entry[1], entry[2], entry[4], entry[3], None, None, entry[5])
+                    elif entry[0] == 'tutkimusraportti':
+                        reference = Reference(entry[0], entry[1], entry[2], entry[4],
+                        entry[3], None, None, None, entry[5])
+                    else:
+                        reference = Reference(entry[0], entry[1], entry[2], entry[4],
+                        entry[3], None, None, None, None, entry[5])
+
+                    entries.append(reference.create_bibtex_entry())
+
+            if self._bibhandler.rewrite_bib_file_humanformat(entries, "references.bib"):
+                self._io.write("Poisto suoritettu.")
+        else:
+            self._io.write("Ei valittu poistettavia viitteitä")
 
     def add_reference_bibtexformat(self):
         bibtex = self._io.read_bibtex("Syötä kirjan bibtex: ")
