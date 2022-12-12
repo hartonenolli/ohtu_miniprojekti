@@ -18,7 +18,7 @@ class CommandLineUI:
                 'type': 'list',
                 'name': 'start input',
                 'message': 'Mitä haluat tehdä?',
-                'choices': ['lisää viite','listaa viitteet', 'etsi viitteitä', 'poista viite','poistu']
+                'choices': ['lisää viite','listaa viitteet', 'etsi viitteitä', 'siirrä viitteitä tiedostoon', 'poista viite', 'poistu']
                 }
             user_input = self._io.read_pyinquirer(start_input)
 
@@ -74,6 +74,9 @@ class CommandLineUI:
                 'message': 'Mitkä viitteet poistetaan?',
                 'choices': [self._service.list_reference]
                 }
+
+            elif user_input['start input'] == 'siirrä viitteitä tiedostoon':
+                self._service.add_to_new_file()
 
             elif user_input['start input'] == "poistu":
                 self._run = False
