@@ -18,7 +18,7 @@ class CommandLineUI:
                 'type': 'list',
                 'name': 'start input',
                 'message': 'Mitä haluat tehdä?',
-                'choices': ['lisää viite','listaa viitteet', 'etsi viitteitä', 'poistu']
+                'choices': ['lisää viite','listaa viitteet', 'etsi viitteitä', 'poista viite','poistu']
                 }
             user_input = self._io.read_pyinquirer(start_input)
 
@@ -66,6 +66,14 @@ class CommandLineUI:
                 entry_type = self._io.read_pyinquirer(add_input)
                 self._service.filter_references(entry_type['add input'])
 
+            elif user_input['start_input'] == 'poista viite':
+                add_input =  {
+                'type': 'checkbox',
+                'qmark': 'X',
+                'name': 'delete',
+                'message': 'Mitkä viitteet poistetaan?',
+                'choices': [self._service.list_reference]
+                }
 
             elif user_input['start input'] == "poistu":
                 self._run = False

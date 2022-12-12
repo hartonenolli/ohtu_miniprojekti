@@ -1,5 +1,6 @@
 from entities.reference import Reference
 
+
 class ReferenceServices:
     def __init__(self, io, bibhandler, filename, filterservice):
         self._io = io
@@ -48,13 +49,22 @@ class ReferenceServices:
                 reference = Reference("julkaisematon", entry["ID"], entry["title"],
                 entry["author"], entry["year"], None, None, None, None, entry["note"])
             refs.append(reference)
-        self.write_references(refs)
+        return refs
+        #self.write_references(refs)
 
     def add_reference_humanformat(self, entry_type):
         self._io.write("Syötä viitteen tiedot:")
-        key = self._io.read("Avainsana, jolla haluat viitata teokseen: ")
-        title = self._io.read("Nimi: ")
-        author = self._io.read("Kirjoittaja/t: ")
+        try_loop = True
+        while try_loop:
+            try:
+                key = self._io.read("Avainsana, jolla haluat viitata teokseen: ")
+                title = self._io.read("Nimi: ")
+                author = self._io.read("Kirjoittaja/t: ")
+                if not key or not title or not author:
+                    raise ReferenceError
+                try_loop = False
+            except ReferenceError:
+                self._io.write("Viitteellä oltava avainsana, nimi ja kirjoittaja")
         year = self._io.read("Julkaisuvuosi (jätä tyhjäksi jos ei ole): ")
         if entry_type == 'kirja':
             publisher = self._io.read("Kustantaja: ")
@@ -99,13 +109,14 @@ class ReferenceServices:
         else:
             references = self.filterservice.filter_by_title(references, keyword)
 
-        self.list_references(references)
+        
+        self.write_references(self.list_references(references))
 
     def sort_references(self, basis):
 
         references = self._bibhandler.read_from_bib_file(self.filename)
         if basis == 'lisäysjärjestys':
-            self.list_references(references)
+            self.write_references(self.list_references(references))
         else:
             if basis == 'vuoden':
                 references = self.filterservice.sort_by_year(references)
@@ -122,4 +133,4 @@ class ReferenceServices:
             else:
                 references = self.filterservice.sort_by_title(references)
 
-            self.list_references(references)
+            self.write_references(self.list_references(references))
