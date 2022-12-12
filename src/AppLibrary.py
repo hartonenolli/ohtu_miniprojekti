@@ -54,8 +54,8 @@ class AppLibrary():
     
     def first_output_filter(self, value):
         outputs = self._io.outputs
-        if value != outputs[6]:
-            raise AssertionError(f"Not same")
+        if value != outputs[3]:
+            raise AssertionError(f"Not same {str(outputs)}")
     
     def output_should_not_contain(self, value):
         outputs = self._io.outputs
