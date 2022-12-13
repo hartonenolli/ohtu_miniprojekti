@@ -267,7 +267,10 @@ class TestReferenceServices(unittest.TestCase):
         io = StubIO(["tiedostonimi"])
         ref_service = ReferenceServices(io, self.bibhandler_mock, self.filename, self.filterservice_mock)
         ref_service.add_to_new_file(["kirja. 1. author. 2000. title. publisher. ", 
-            "kirja. 2. author2. 2002. title2. publisher2. "])
+            "lehtiartikkeli. 2. Kirjailijat. 1999. Lehtinen. Seiska. ",
+            "gradu. 3. Taneli Tohtori. 2003. Liukkaustutkimus. Helsingin Yliopisto. ",
+            "tutkimusraportti. 4. Ahkera Tutkija. 1966. Kiinnostava Tutkimus. Nokia. ",
+            "julkaisematon. 5. Herra Karhunen. 2007. Hillopurkin muoto. Hyvää hilloa. "])
         self.assertEqual(io.outputs[-1], "Viitteiden kirjoittaminen uuteen tiedostoon onnistui. ")
 
     def test_add_to_new_file_wrong_file_name(self):
@@ -275,3 +278,61 @@ class TestReferenceServices(unittest.TestCase):
         ref_service = ReferenceServices(io, self.bibhandler_mock, self.filename, self.filterservice_mock)
         ref_service.add_to_new_file(["kirja. 1. author. 2000. title. publisher. "])
         self.assertEqual(io.outputs[-1], "Viitteiden kirjoittaminen uuteen tiedostoon onnistui. ")
+
+
+    def test_delete_reference_no_added_references(self):
+        io = StubIO([])
+        ref_service = ReferenceServices(io, self.bibhandler_mock, self.filename, self.filterservice_mock)
+        ref_service.delete_reference([])
+        self.assertEqual(io.outputs[-1], "Ei valittu poistettavia viitteitä ")
+
+    def test_delete_deletes_reference(self):
+        io = StubIO(["1", "title", "author", "2000", "publisher"])
+        ref_service = (ReferenceServices(io, self.bibhandler_mock, self.filename, self.filterservice_mock))
+        ref_service.add_reference_humanformat("kirja")
+        ref_service.delete_reference(["kirja. 1. author. 2000. title. publisher. "])
+        self.assertEqual(io.outputs[-1], "Poisto suoritettu. ")
+
+    def test_delete_deletes_reference_book(self):
+        io = StubIO(["1", "title", "author", "2000", "publisher", "1", "title", "author", "2000", "publisher"])
+        ref_service = (ReferenceServices(io, self.bibhandler_mock, self.filename, self.filterservice_mock))
+        ref_service.add_reference_humanformat("kirja")
+        ref_service.add_reference_humanformat("kirja")
+        ref_service.delete_reference(["kirja. 1. author. 2000. title. publisher. "])
+        self.assertEqual(io.outputs[-1], "Poisto suoritettu. ")
+
+    def test_delete_deletes_reference_unpublished(self):
+        io = StubIO(["1", "title", "author", "2000", "publisher", "1", "title", "author", "2000", "publisher"])
+        ref_service = (ReferenceServices(io, self.bibhandler_mock, self.filename, self.filterservice_mock))
+        ref_service.add_reference_humanformat("julkaisematon")
+        ref_service.add_reference_humanformat("kirja")
+
+        ref_service.delete_reference(["julkaisematon. 1. author. 2000. title. publisher. "])
+        self.assertEqual(io.outputs[-1], "Poisto suoritettu. ")
+
+    def test_delete_deletes_reference_mastersthesis(self):
+        io = StubIO(["1", "title", "author", "2000", "publisher", "1", "title", "author", "2000", "publisher"])
+        ref_service = (ReferenceServices(io, self.bibhandler_mock, self.filename, self.filterservice_mock))
+        ref_service.add_reference_humanformat("gradu")
+        ref_service.add_reference_humanformat("kirja")
+
+        ref_service.delete_reference(["gradu. 1. author. 2000. title. publisher. "])
+        self.assertEqual(io.outputs[-1], "Poisto suoritettu. ")
+
+    def test_delete_deletes_reference_techreport(self):
+        io = StubIO(["1", "title", "author", "2000", "publisher", "1", "title", "author", "2000", "publisher"])
+        ref_service = (ReferenceServices(io, self.bibhandler_mock, self.filename, self.filterservice_mock))
+        ref_service.add_reference_humanformat("tutkimusraportti")
+        ref_service.add_reference_humanformat("kirja")
+
+        ref_service.delete_reference(["tutkimusraportti. 1. author. 2000. title. publisher. "])
+        self.assertEqual(io.outputs[-1], "Poisto suoritettu. ")
+
+    def test_delete_deletes_reference_article(self):
+        io = StubIO(["1", "title", "author", "2000", "publisher", "1", "title", "author", "2000", "publisher"])
+        ref_service = (ReferenceServices(io, self.bibhandler_mock, self.filename, self.filterservice_mock))
+        ref_service.add_reference_humanformat("lehtiartikkeli")
+        ref_service.add_reference_humanformat("kirja")
+
+        ref_service.delete_reference(["lehtiartikkeli. 1. author. 2000. title. publisher. "])
+        self.assertEqual(io.outputs[-1], "Poisto suoritettu. ")
