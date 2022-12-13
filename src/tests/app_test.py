@@ -70,3 +70,17 @@ class TestCommandLineUI(unittest.TestCase):
         self.app.start_app()
 
         self.assertEqual(self.service_mock.filter_references.call_count, 1)
+    
+    def test_delete_reference_calls_right_function(self):
+        io = StubIO(["poista viite", "[]", "poistu"])
+        self.service_mock = Mock(wraps=ReferenceServices(io, self.bibhandler_mock, self.filename, self.filterservice_mock))
+        self.app = CommandLineUI(io, self.service_mock)
+        self.app.start_app()
+        self.assertEqual(self.service_mock.delete_reference.call_count, 1)
+
+    def test_add_references_to_new_file_calls_right_function(self):
+        io = StubIO(["siirrä viitteitä tiedostoon", "", "uusi", "poistu"])
+        self.service_mock = Mock(wraps=ReferenceServices(io, self.bibhandler_mock, self.filename, self.filterservice_mock))
+        self.app = CommandLineUI(io, self.service_mock)
+        self.app.start_app()
+        self.assertEqual(self.service_mock.add_to_new_file.call_count, 1)
