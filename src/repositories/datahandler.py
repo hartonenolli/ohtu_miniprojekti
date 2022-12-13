@@ -40,3 +40,14 @@ class BibtexHandler:
             return True
         except PermissionError:
             return False
+
+    def rewrite_bib_file_humanformat(self, entries, file):
+        writer = BibTexWriter()
+        writer.indent = "    "
+        try:
+            with open(file, "w", encoding="utf-8") as bibfile:
+                for entry in entries:
+                    bibfile.write(writer.write(entry))
+            return True
+        except PermissionError:
+            return False
