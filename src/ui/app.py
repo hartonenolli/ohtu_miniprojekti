@@ -52,7 +52,7 @@ class CommandLineUI:
                 'type': 'list',
                 'name': 'add input',
                 'message': 'Millä perusteella haluaisit listata viitteitä?',
-                'choices': ['lisäysjärjestys', 'vuoden', 'tekijän', 'julkaisijan', 'viitetyypin', 'nimen']
+                'choices': ['lisäysjärjestys', 'vuoden', 'tekijän', 'viitetyypin', 'nimen']
                 }
                 entry_type = self._io.read_pyinquirer(add_input)
                 self._service.sort_references(entry_type['add input'])
