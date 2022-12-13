@@ -130,19 +130,19 @@ class ReferenceServices:
         keyword = self._io.read("Syötä hakusana: ")
         references = self._bibhandler.read_from_bib_file(self.filename)
         if basis == 'vuoden':
-            references = self.filterservice.filter_by_year(references, int(keyword))
+            references = self.filterservice.filter_by(references, "year", keyword)
 
         elif basis == 'tekijän':
-            references = self.filterservice.filter_by_author(references, keyword)
+            references = self.filterservice.filter_by(references, "author", keyword)
 
         elif basis == 'julkaisijan':
-            references = self.filterservice.filter_by_publisher(references, keyword)
+            references = self.filterservice.filter_by(references, "publisher", keyword)
 
         elif basis == 'viitetyypin':
-            references = self.filterservice.filter_by_entrytype(references, keyword)
+            references = self.filterservice.filter_by(references, "ENTRYTYPE", keyword)
 
         else:
-            references = self.filterservice.filter_by_title(references, keyword)
+            references = self.filterservice.filter_by(references, "title", keyword)
 
 
         self.write_references(self.list_references(references))
