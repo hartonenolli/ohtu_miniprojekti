@@ -44,6 +44,9 @@ class AppLibrary():
     def input(self, value):
         self._io.add_input(value)
 
+    def input_list(self, value):
+        self._io.add_input([value])
+
     def run_app(self):
         self._app.start_app()
 
@@ -61,3 +64,6 @@ class AppLibrary():
         outputs = self._io.outputs
         if value in outputs:
             raise AssertionError(f"Output \"{value}\" is in {str(outputs)}")
+    
+    def input_empty(self, value):
+        self._io.add_input([])
