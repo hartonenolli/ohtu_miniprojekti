@@ -257,3 +257,8 @@ class TestReferenceServices(unittest.TestCase):
         self.assertEqual(self.filterservice_mock.sort_by.call_count, 1)
         self.filterservice_mock.sort_by.assert_called_with(ANY, "title")
 
+    def test_add_to_new_file_runs_to_end(self):
+        io = StubIO(["tiedostonimi"])
+        ref_service = ReferenceServices(io, self.bibhandler_mock, self.filename, self.filterservice_mock)
+        result = ref_service.add_to_new_file(["kirja. 1. author. 2000. title. publisher. "])
+        self.assertEqual(result, None)
