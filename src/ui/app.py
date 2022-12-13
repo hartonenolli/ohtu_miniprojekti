@@ -1,6 +1,6 @@
 import os
 from os import name
-import PyInquirer
+
 
 class CommandLineUI:
     def __init__(self, io, service):

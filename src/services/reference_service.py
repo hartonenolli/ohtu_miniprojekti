@@ -1,5 +1,4 @@
 from os import path, remove
-
 from entities.reference import Reference
 
 
@@ -51,10 +50,13 @@ class ReferenceServices:
 
     def add_reference_bibtexformat(self):
         bibtex = self._io.read_bibtex("Syötä kirjan bibtex: ")
-        if self._bibhandler.write_to_bib_file_bibtexformat(bibtex, self.filename):
-            self._io.write("BibTex tiedoston kirjoittaminen onnistui ")
+        if bibtex:
+            if self._bibhandler.write_to_bib_file_bibtexformat(bibtex, self.filename):
+                self._io.write("BibTex tiedoston kirjoittaminen onnistui ")
+            else:
+                self._io.write("BibTex tiedoston kirjoittaminen epäonnistui ")
         else:
-            self._io.write("BibTex tiedoston kirjoittaminen epäonnistui ")
+            self._io.write("Syöte on tyhjä. ")
 
 
     def write_references(self, referencelist):
