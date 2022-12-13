@@ -2,7 +2,7 @@ from bibtexparser.bibdatabase import BibDatabase
 class FilterService():
     def __init__(self) -> None:
         pass
- 
+
     def sort_by(self, bib_database, sort_keyword, descending=False):
         if descending:
             bib_database.entries.sort(key= lambda x : x[sort_keyword], reverse=True)
