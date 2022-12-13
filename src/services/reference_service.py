@@ -18,43 +18,42 @@ class ReferenceServices:
                 try:
                     all_references.remove({'name': reference})
                 except ValueError:
-                    self._io.write(f"Viiteen {reference} poisto epäonnistui.")
+                    self._io.write(f"Viiteen {reference} poisto epäonnistui. ")
 
             entries = []
-            for i in all_references:
-                for entry in i.values():
-                    entry = entry.split(". ")
-                    if entry[0] == 'kirja':
-                        reference = Reference(
-                            entry[0],entry[1], entry[2], entry[4], entry[3], entry[5])
-                    elif entry[0] == 'lehtiartikkeli':
-                        reference = Reference(
-                            entry[0], entry[1], entry[2], entry[4], entry[3], None, entry[5])
-                    elif entry[0] == 'gradu':
-                        reference = Reference(
-                            entry[0], entry[1], entry[2], entry[4], entry[3], None, None, entry[5])
-                    elif entry[0] == 'tutkimusraportti':
-                        reference = Reference(
-                            entry[0], entry[1], entry[2], entry[4],
-                        entry[3], None, None, None, entry[5])
-                    else:
-                        reference = Reference(
-                            entry[0], entry[1], entry[2], entry[4],
-                            entry[3], None, None, None, None, entry[5])
+            for entry in all_references:
+                entry = entry.split(". ")
+                if entry[0] == 'kirja':
+                    reference = Reference(
+                        entry[0],entry[1], entry[2], entry[4], entry[3], entry[5])
+                elif entry[0] == 'lehtiartikkeli':
+                    reference = Reference(
+                        entry[0], entry[1], entry[2], entry[4], entry[3], None, entry[5])
+                elif entry[0] == 'gradu':
+                    reference = Reference(
+                        entry[0], entry[1], entry[2], entry[4], entry[3], None, None, entry[5])
+                elif entry[0] == 'tutkimusraportti':
+                    reference = Reference(
+                        entry[0], entry[1], entry[2], entry[4],
+                    entry[3], None, None, None, entry[5])
+                else:
+                    reference = Reference(
+                        entry[0], entry[1], entry[2], entry[4],
+                        entry[3], None, None, None, None, entry[5])
 
-                    entries.append(reference.create_bibtex_entry())
+                entries.append(reference.create_bibtex_entry())
 
-            if self._bibhandler.rewrite_bib_file_humanformat(entries, "references.bib"):
-                self._io.write("Poisto suoritettu.")
+            if self._bibhandler.rewrite_bib_file_humanformat(entries, self.filename):
+                self._io.write("Poisto suoritettu. ")
         else:
-            self._io.write("Ei valittu poistettavia viitteitä")
+            self._io.write("Ei valittu poistettavia viitteitä ")
 
     def add_reference_bibtexformat(self):
         bibtex = self._io.read_bibtex("Syötä kirjan bibtex: ")
         if self._bibhandler.write_to_bib_file_bibtexformat(bibtex, self.filename):
-            self._io.write("BibTex tiedoston kirjoittaminen onnistui")
+            self._io.write("BibTex tiedoston kirjoittaminen onnistui ")
         else:
-            self._io.write("BibTex tiedoston kirjoittaminen epäonnistui")
+            self._io.write("BibTex tiedoston kirjoittaminen epäonnistui ")
 
 
     def write_references(self, referencelist):
@@ -62,7 +61,7 @@ class ReferenceServices:
             for reference in referencelist:
                 self._io.write(reference)
         else:
-            self._io.write("Viitekirjasto on tyhjä.")
+            self._io.write("Viitekirjasto on tyhjä. ")
 
     def list_references(self, references):
         refs = []
@@ -99,7 +98,7 @@ class ReferenceServices:
                     raise ReferenceError
                 break
             except ReferenceError:
-                self._io.write("Viitteellä oltava avainsana, nimi ja kirjoittaja")
+                self._io.write("Viitteellä oltava avainsana, nimi ja kirjoittaja ")
         year = self._io.read("Julkaisuvuosi (jätä tyhjäksi jos ei ole): ")
         if entry_type == 'kirja':
             publisher = self._io.read("Kustantaja: ")
@@ -121,9 +120,9 @@ class ReferenceServices:
         self._io.write("Lisätään " + str(reference))
         entry = reference.create_bibtex_entry()
         if self._bibhandler.write_to_bib_file_humanformat(entry, self.filename):
-            self._io.write("BibTex tiedoston kirjoittaminen onnistui")
+            self._io.write("BibTex tiedoston kirjoittaminen onnistui ")
         else:
-            self._io.write("BibTex tiedoston kirjoittaminen epäonnistui")
+            self._io.write("BibTex tiedoston kirjoittaminen epäonnistui ")
 
     def filter_references(self, basis):
 
@@ -175,11 +174,12 @@ class ReferenceServices:
             new_file_name = new_file_name + ".bib"
             if new_file_name != "references.bib":
                 break
-            self._io.write("Kokeile toista tiedoston nimeä")
+            self._io.write("Kokeile toista tiedoston nimeä ")
 
         if path.isfile(new_file_name):
             remove(new_file_name)
 
+        entries = []
         for entry in references:
             entry = entry.split(". ")
             if entry[0] == 'kirja':
@@ -200,12 +200,12 @@ class ReferenceServices:
                     entry[0], entry[1], entry[2], entry[4],
                     entry[3], None, None, None, None, entry[5])
 
-            entry = reference.create_bibtex_entry()
+            entries.append(reference.create_bibtex_entry())
 
-            if self._bibhandler.write_to_bib_file_humanformat(entry, new_file_name):
-                self._io.write(f"{str(reference)} lisääminen onnistui")
-            else:
-                self._io.write(f"{str(reference)} lisääminen epäonnistui")
+        if self._bibhandler.rewrite_bib_file_humanformat(entries, new_file_name):
+            self._io.write("Viitteiden kirjoittaminen uuteen tiedostoon onnistui suoritettu. ")
+        else:
+            self._io.write("Viitteiden kirjoittaminen uuteen tiedostoon epäonnistui ")
 
     def all_references(self):
         references = self._bibhandler.read_from_bib_file(self.filename)
