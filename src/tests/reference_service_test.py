@@ -267,7 +267,10 @@ class TestReferenceServices(unittest.TestCase):
         io = StubIO(["tiedostonimi"])
         ref_service = ReferenceServices(io, self.bibhandler_mock, self.filename, self.filterservice_mock)
         ref_service.add_to_new_file(["kirja. 1. author. 2000. title. publisher. ", 
-            "kirja. 2. author2. 2002. title2. publisher2. "])
+            "lehtiartikkeli. 2. Kirjailijat. 1999. Lehtinen. Seiska. ",
+            "gradu. 3. Taneli Tohtori. 2003. Liukkaustutkimus. Helsingin Yliopisto. ",
+            "tutkimusraportti. 4. Ahkera Tutkija. 1966. Kiinnostava Tutkimus. Nokia. ",
+            "julkaisematon. 5. Herra Karhunen. 2007. Hillopurkin muoto. Hyvää hilloa. "])
         self.assertEqual(io.outputs[-1], "Viitteiden kirjoittaminen uuteen tiedostoon onnistui suoritettu. ")
 
     def test_add_to_new_file_wrong_file_name(self):
