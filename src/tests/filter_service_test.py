@@ -12,10 +12,11 @@ class TestFilterService(unittest.TestCase):
         self.filter_service = FilterService()
         references = [
             Reference("kirja", "Waltari45", "Sinuhe Egyptiläinen", "Mika Waltari", "1945", "WSOY"),
-            Reference("kirja", "Tolkien54", "The Fellowship of The Ring", "J. R. R Tolkien", "1954", "Allen & Unwin"),
+            Reference("kirja", "Tolkien54", "The Fellowship of The Ring", "J. R. R. Tolkien", "1954", "Allen & Unwin"),
             Reference("gradu", "Korhonen02", "Gradu Hienosta Asiata", "Pekka Korhonen", "2002", school="Helsingin Yliopisto"),
             Reference("gradu", "Virtanen15", "Toinen Hieno Gradu", "Janne Virtanen", "2015", school="Helsingin Yliopisto"),
-            Reference("tutkimusraportti", "Nurmi00", "Mahtava tutkimusraportti", "Ilkka Nurmi", "2000", institution="Helsingin Yliopisto")
+            Reference("tutkimusraportti", "Nurmi00", "Mahtava tutkimusraportti", "Ilkka Nurmi", "2000", institution="Helsingin Yliopisto"),
+            Reference("tutkimusraportti", "Mäkelä01", "Legendaarinen tutkimusraportti", "Olli MÄkelä", "2000", institution="Helsingin yliopisto")
         ]
         self.bib_references = []
         for ref in references:
@@ -39,8 +40,35 @@ class TestFilterService(unittest.TestCase):
         filter_result = self.filter_service.sort_by(self.bib_database, "title")
         self.assertEqual(self.bib_references[2].entries[0]["ID"], filter_result.entries[0]["ID"])
         self.assertEqual(self.bib_references[3].entries[0]["ID"], filter_result.entries[-1]["ID"])
+    
+#    def test_sorting_by_publisher_works(self):
+#        filter_result = self.filter_service.sort_by(self.bib_database, "publisher")
+#        self.assertEqual(self.bib_references[2].entries[0]["ID"], filter_result.entries[0]["ID"])
 
-    def test_filter_by_year_works(self):
-        filter_result = self.filter_service.filter_by_year(self.bib_database, 1954)
+    def test_filter_by_year_works_single(self):
+        filter_result = self.filter_service.filter_by(self.bib_database, "year", "1954")
         self.assertEqual(self.bib_references[1].entries[0]["ID"], filter_result.entries[0]["ID"])
 
+
+    def test_filter_by_year_works_multiple(self):
+        filter_result = self.filter_service.filter_by(self.bib_database, "year", "2000")
+        self.assertEqual(self.bib_references[4].entries[0]["ID"], filter_result.entries[0]["ID"])
+        self.assertEqual(self.bib_references[5].entries[0]["ID"], filter_result.entries[1]["ID"])
+
+
+    def test_filter_by_entrytype_works(self):
+        filter_result = self.filter_service.filter_by(self.bib_database, "ENTRYTYPE", "book")
+        self.assertEqual(self.bib_references[0].entries[0]["ID"], filter_result.entries[0]["ID"])
+        self.assertEqual(self.bib_references[1].entries[0]["ID"], filter_result.entries[1]["ID"])
+
+    def test_filter_by_author_works(self):
+        filter_result = self.filter_service.filter_by(self.bib_database, "author", "Mika Waltari")
+        self.assertEqual(self.bib_references[0].entries[0]["ID"], filter_result.entries[0]["ID"])
+
+    def test_filter_by_publisher_works(self):
+        filter_result = self.filter_service.filter_by(self.bib_database, "publisher", "WSOY")
+        self.assertEqual(self.bib_references[0].entries[0]["ID"], filter_result.entries[0]["ID"])
+    
+    def test_filter_by_title_works(self):
+        filter_result = self.filter_service.filter_by(self.bib_database, "title", "Legendaarinen tutkimusraportti")
+        self.assertEqual(self.bib_references[5].entries[0]["ID"], filter_result.entries[0]["ID"])
