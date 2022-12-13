@@ -8,7 +8,7 @@ Add One Unpublished
     Add Reference  julkaisematon  Matti15  julkaisematon  Matti Meikäläinen  2015  Parasjulkaisu
     Input  poistu
     Run App
-    Output Should Contain  Lisätään Matti Meikäläinen. 2015. julkaisematon. Parasjulkaisu.
+    Output Should Contain  Lisätään julkaisematon. Matti15. Matti Meikäläinen. 2015. julkaisematon. Parasjulkaisu.
 
 Add Bibtex Unpublished
     Input  lisää viite
@@ -26,4 +26,4 @@ List Unpublished
     Input  lisäysjärjestys
     Input  poistu
     Run App
-    Output Should Contain  Matti Meikäläinen. 2016. julkaisematon. Parasjulkaisu.
+    Output Should Contain  julkaisematon. Matti16. Matti Meikäläinen. 2016. julkaisematon. Parasjulkaisu.

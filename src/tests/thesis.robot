@@ -8,7 +8,7 @@ Add One Thesis
     Add Reference  gradu  Matti15  Gradu  Matti Meikäläinen  2015  HY
     Input  poistu
     Run App
-    Output Should Contain  Lisätään Matti Meikäläinen. 2015. Gradu. HY.
+    Output Should Contain  Lisätään gradu. Matti15. Matti Meikäläinen. 2015. Gradu. HY.
 
 Add Bibtex Thesis
     Input  lisää viite
@@ -26,4 +26,4 @@ List Thesis
     Input  lisäysjärjestys
     Input  poistu
     Run App
-    Output Should Contain  Matti Meikäläinen. 2016. Gradu. HY.
+    Output Should Contain  gradu. Matti16. Matti Meikäläinen. 2016. Gradu. HY.

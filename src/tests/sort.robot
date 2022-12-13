@@ -13,7 +13,7 @@ Sort By Year
     Input  vuoden
     Input  poistu
     Run App
-    First Output Filter  Collins, Robert. 2007. Clean Code: A Handbook of Agile Software Craftsmanship. Apprentice Hall.
+    First Output Filter  kirja. Martin07. Collins, Robert. 2007. Clean Code: A Handbook of Agile Software Craftsmanship. Apprentice Hall.
 
 Sort By Author
     Input  lisää viite
@@ -26,7 +26,7 @@ Sort By Author
     Input  tekijän
     Input  poistu
     Run App
-    First Output Filter  Collins, Robert. 2007. Clean Code: A Handbook of Agile Software Craftsmanship. Apprentice Hall.
+    First Output Filter  kirja. Martin07. Collins, Robert. 2007. Clean Code: A Handbook of Agile Software Craftsmanship. Apprentice Hall.
 
 Sort By Reference Type
     Input  lisää viite
@@ -39,7 +39,7 @@ Sort By Reference Type
     Input  viitetyypin
     Input  poistu
     Run App
-    First Output Filter  Martin, Robert. 2008. Better Code: A Handbook of Agile Software Craftsmanship. Prentice Hall.
+    First Output Filter  kirja. Martin08. Martin, Robert. 2008. Better Code: A Handbook of Agile Software Craftsmanship. Prentice Hall.
 
 Sort By Title
     Input  lisää viite
@@ -52,4 +52,4 @@ Sort By Title
     Input  nimen
     Input  poistu
     Run App
-    First Output Filter  Martin, Robert. 2008. Better Code: A Handbook of Agile Software Craftsmanship. Prentice Hall.
+    First Output Filter  kirja. Martin08. Martin, Robert. 2008. Better Code: A Handbook of Agile Software Craftsmanship. Prentice Hall.
