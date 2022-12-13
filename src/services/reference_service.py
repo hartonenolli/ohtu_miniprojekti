@@ -22,6 +22,7 @@ class ReferenceServices:
 
             entries = []
             for entry in all_references:
+                entry = entry['name']
                 entry = entry.split(". ")
                 if entry[0] == 'kirja':
                     reference = Reference(
