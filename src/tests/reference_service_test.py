@@ -261,17 +261,17 @@ class TestReferenceServices(unittest.TestCase):
         io = StubIO(["tiedostonimi"])
         ref_service = ReferenceServices(io, self.bibhandler_mock, self.filename, self.filterservice_mock)
         ref_service.add_to_new_file(["kirja. 1. author. 2000. title. publisher. "])
-        self.assertEqual(io.outputs[-1], "Viitteiden kirjoittaminen uuteen tiedostoon onnistui suoritettu. ")
+        self.assertEqual(io.outputs[-1], "Viitteiden kirjoittaminen uuteen tiedostoon onnistui. ")
 
     def test_add_to_new_file_adds_multiple(self):
         io = StubIO(["tiedostonimi"])
         ref_service = ReferenceServices(io, self.bibhandler_mock, self.filename, self.filterservice_mock)
         ref_service.add_to_new_file(["kirja. 1. author. 2000. title. publisher. ", 
             "kirja. 2. author2. 2002. title2. publisher2. "])
-        self.assertEqual(io.outputs[-1], "Viitteiden kirjoittaminen uuteen tiedostoon onnistui suoritettu. ")
+        self.assertEqual(io.outputs[-1], "Viitteiden kirjoittaminen uuteen tiedostoon onnistui. ")
 
     def test_add_to_new_file_wrong_file_name(self):
         io = StubIO(["references", "tiedostonimi"])
         ref_service = ReferenceServices(io, self.bibhandler_mock, self.filename, self.filterservice_mock)
         ref_service.add_to_new_file(["kirja. 1. author. 2000. title. publisher. "])
-        self.assertEqual(io.outputs[-1], "Viitteiden kirjoittaminen uuteen tiedostoon onnistui suoritettu. ")
+        self.assertEqual(io.outputs[-1], "Viitteiden kirjoittaminen uuteen tiedostoon onnistui. ")

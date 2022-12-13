@@ -14,4 +14,4 @@ Adding To New File
     Input  uusi
     Input  poistu
     Run App
-    Output Should Contain  Viitteiden kirjoittaminen uuteen tiedostoon onnistui suoritettu. 
+    Output Should Contain  Viitteiden kirjoittaminen uuteen tiedostoon onnistui. 

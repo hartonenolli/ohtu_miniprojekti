@@ -194,7 +194,7 @@ class ReferenceServices:
                 entries.append(reference.create_bibtex_entry())
 
             if self._bibhandler.rewrite_bib_file_humanformat(entries, new_file_name):
-                self._io.write("Viitteiden kirjoittaminen uuteen tiedostoon onnistui suoritettu. ")
+                self._io.write("Viitteiden kirjoittaminen uuteen tiedostoon onnistui. ")
             else:
                 self._io.write("Viitteiden kirjoittaminen uuteen tiedostoon epäonnistui ")
         else:
