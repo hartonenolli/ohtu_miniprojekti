@@ -40,10 +40,6 @@ class TestFilterService(unittest.TestCase):
         filter_result = self.filter_service.sort_by(self.bib_database, "title")
         self.assertEqual(self.bib_references[2].entries[0]["ID"], filter_result.entries[0]["ID"])
         self.assertEqual(self.bib_references[3].entries[0]["ID"], filter_result.entries[-1]["ID"])
-    
-#    def test_sorting_by_publisher_works(self):
-#        filter_result = self.filter_service.sort_by(self.bib_database, "publisher")
-#        self.assertEqual(self.bib_references[2].entries[0]["ID"], filter_result.entries[0]["ID"])
 
     def test_filter_by_year_works_single(self):
         filter_result = self.filter_service.filter_by(self.bib_database, "year", "1954")
