@@ -34,20 +34,20 @@ class ReferenceServices:
         entry = raw_reference.split(". ")
         if entry[0] == 'kirja':
             reference = Reference(
-                entry[0],entry[1], entry[2], entry[4], entry[3], entry[5])
+                entry[0],entry[1], entry[4], entry[2], entry[3], entry[5])
         elif entry[0] == 'lehtiartikkeli':
             reference = Reference(
-                entry[0], entry[1], entry[2], entry[4], entry[3], None, entry[5])
+                entry[0], entry[1], entry[4], entry[2], entry[3], None, entry[5])
         elif entry[0] == 'gradu':
             reference = Reference(
-                entry[0], entry[1], entry[2], entry[4], entry[3], None, None, entry[5])
+                entry[0], entry[1], entry[4], entry[2], entry[3], None, None, entry[5])
         elif entry[0] == 'tutkimusraportti':
             reference = Reference(
-                entry[0], entry[1], entry[2], entry[4],
+                entry[0], entry[1], entry[4], entry[2],
             entry[3], None, None, None, entry[5])
         else:
             reference = Reference(
-                entry[0], entry[1], entry[2], entry[4],
+                entry[0], entry[1], entry[4], entry[2],
                 entry[3], None, None, None, None, entry[5])
 
         return reference
