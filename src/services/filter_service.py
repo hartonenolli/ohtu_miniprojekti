@@ -13,5 +13,5 @@ class FilterService():
     def filter_by(self, bib_database, filter_keyword : str, match_case):
         bib_result_database = BibDatabase()
         bib_result_database.entries = [reference for reference in bib_database.entries
-        if filter_keyword in reference and reference[filter_keyword] == match_case]
+        if filter_keyword in reference and reference[filter_keyword].find(match_case) != -1]
         return bib_result_database
