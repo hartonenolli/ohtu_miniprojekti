@@ -63,8 +63,9 @@ Nyt ladataan sovelluksen riippuvuudet komennolla
 poetry install
 ```
 
-
 ### Sovelluksen käyttäminen
+
+#### Komennot
 
 Aloita sovellus komennolla:
 ```bash
@@ -81,7 +82,20 @@ Testikattavuusraportin voi luoda komennolla:
 poetry run invoke coveragereport
 ```
 
+Robot Framework testit voi suorittaa komennolla:
+```bash
+poetry run invoke robot
+```
+
+
 Suorita pylint komennolla:
 ```bash
 poetry run invoke lint
 ```
+
+#### Miten navigoida
+Sovellusta käytetään nuolinäppäimillä <kbd>&uarr;</kbd><kbd>&darr;</kbd>.
+
+Valitaksesi seuraavan asian paina <kbd>enter</kbd>.
+
+Valitse tiedostoja uuteen tiedostoon ja poistaessasi tiedostoja valitse tiedostot painamalla <kbd>space</kbd>
