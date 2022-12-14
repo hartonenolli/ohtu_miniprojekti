@@ -4,6 +4,7 @@ from repositories.datahandler import BibtexHandler
 from services.reference_service import ReferenceServices
 from services.filter_service import FilterService
 
+
 class StubIO:
     def __init__(self, inputs=None):
         self.inputs = inputs or []
@@ -12,11 +13,13 @@ class StubIO:
     def read(self, prompt):
         if len(self.inputs) > 0:
             return self.inputs.pop(0)
+
         return ""
 
     def read_bibtex(self, prompt):
         if len(self.inputs) > 0:
             return self.inputs.pop(0)
+
         return ""
 
     def read_pyinquirer(self, value):
@@ -24,6 +27,7 @@ class StubIO:
         if len(self.inputs) > 0:
             d[value["name"]] = self.inputs.pop(0)
             return d
+
         return ""
 
     def write(self, prompt):
@@ -31,6 +35,7 @@ class StubIO:
 
     def add_input(self, value):
         self.inputs.append(value)
+
 
 class AppLibrary():
     def __init__(self):
@@ -64,6 +69,6 @@ class AppLibrary():
         outputs = self._io.outputs
         if value in outputs:
             raise AssertionError(f"Output \"{value}\" is in {str(outputs)}")
-    
+            
     def input_empty(self, value):
         self._io.add_input([])

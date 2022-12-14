@@ -16,3 +16,4 @@ Latex möröt ohtu miniprojekti
 [definition of done](https://github.com/hartonenolli/ohtu_miniprojekti/blob/main/dokumentaatio/definition_of_done.md)
 
 [burndown ja työmääräarviot](https://helsinkifi-my.sharepoint.com/:x:/g/personal/katakris_ad_helsinki_fi/EbP8F7BvYYBBqDhL_v3D42oBdMWc0VdeyTp1U0iYc5WA1g?e=jKhmDh)
+
