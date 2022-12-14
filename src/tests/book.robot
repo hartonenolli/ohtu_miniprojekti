@@ -8,7 +8,7 @@ Add One Book
     Add Reference  kirja  Kalle11  Kivakirja  Kalle Kirjailija  2011  Kaverijulkaisu
     Input  poistu
     Run App
-    Output Should Contain  Lisätään Kalle Kirjailija. 2011. Kivakirja. Kaverijulkaisu.
+    Output Should Contain  Lisätään kirja. Kalle11. Kalle Kirjailija. 2011. Kivakirja. Kaverijulkaisu.
 
 Add Bibtex Book
     Input  lisää viite
@@ -26,4 +26,4 @@ List Book
     Input  lisäysjärjestys
     Input  poistu
     Run App
-    Output Should Contain  Kalle Kirjailija. 2012. Kivakirja osa 2. Kaverijulkaisu.
+    Output Should Contain  kirja. Kalle12. Kalle Kirjailija. 2012. Kivakirja osa 2. Kaverijulkaisu.

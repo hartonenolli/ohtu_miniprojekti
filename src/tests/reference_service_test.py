@@ -41,7 +41,7 @@ class TestReferenceServices(unittest.TestCase):
         ref_service = ReferenceServices(io, self.bibhandler_mock, self.filename, self.filterservice_mock)
         ref_service.add_reference_humanformat("kirja")
 
-        self.assertEqual(io.outputs[-1], "BibTex tiedoston kirjoittaminen onnistui")
+        self.assertEqual(io.outputs[-1], "BibTex tiedoston kirjoittaminen onnistui ")
 
     def test_add_reference_humanformat_returns_correct_output_when_writing_to_file_does_not_succeed(self):
         io = StubIO(["Sinuhe Egyptiläinen", "Mika Waltari", "1945", "WSOY", "avainsana"])
@@ -50,7 +50,7 @@ class TestReferenceServices(unittest.TestCase):
         self.bibhandler_mock.write_to_bib_file_humanformat.return_value = False
         ref_service.add_reference_humanformat("kirja")
 
-        self.assertEqual(io.outputs[-1], "BibTex tiedoston kirjoittaminen epäonnistui")
+        self.assertEqual(io.outputs[-1], "BibTex tiedoston kirjoittaminen epäonnistui ")
 
     def test_add_reference_bibtexformat_returns_correct_output_when_writing_to_file_successful(self):
         io = StubIO(["testi"])
@@ -60,7 +60,7 @@ class TestReferenceServices(unittest.TestCase):
         ref_service.add_reference_bibtexformat()
 
         self.assertEqual(self.bibhandler_mock.write_to_bib_file_bibtexformat.call_count, 1)
-        self.assertEqual(io.outputs[-1], "BibTex tiedoston kirjoittaminen onnistui")
+        self.assertEqual(io.outputs[-1], "BibTex tiedoston kirjoittaminen onnistui ")
 
     def test_add_reference_bibtexformat_returns_correct_output_when_writing_to_file_failed(self):
         io = StubIO(["testi"])
@@ -70,35 +70,35 @@ class TestReferenceServices(unittest.TestCase):
         ref_service.add_reference_bibtexformat()
 
         self.assertEqual(self.bibhandler_mock.write_to_bib_file_bibtexformat.call_count, 1)
-        self.assertEqual(io.outputs[-1], "BibTex tiedoston kirjoittaminen epäonnistui")
+        self.assertEqual(io.outputs[-1], "BibTex tiedoston kirjoittaminen epäonnistui ")
 
     def test_add_reference_humanformat_works_with_article(self):
         io = StubIO(["avainsana", "nimi", "kirjoittaja", "1", "julkaisu"])
         ref_service = ReferenceServices(io, self.bibhandler_mock, self.filename, self.filterservice_mock)
         ref_service.add_reference_humanformat("lehtiartikkeli")
 
-        self.assertEqual(io.outputs[-1], "BibTex tiedoston kirjoittaminen onnistui")
+        self.assertEqual(io.outputs[-1], "BibTex tiedoston kirjoittaminen onnistui ")
 
     def test_add_reference_humanformat_works_gradu(self):
         io = StubIO(["avainsana", "nimi", "kirjoittaja", "1", "koulu"])
         ref_service = ReferenceServices(io, self.bibhandler_mock, self.filename, self.filterservice_mock)
         ref_service.add_reference_humanformat("gradu")
 
-        self.assertEqual(io.outputs[-1], "BibTex tiedoston kirjoittaminen onnistui")
+        self.assertEqual(io.outputs[-1], "BibTex tiedoston kirjoittaminen onnistui ")
 
     def test_add_reference_humanformat_works_with_tutkimus(self):
         io = StubIO(["avainsana", "nimi", "kirjoittaja", "1", "orgasinattio"])
         ref_service = ReferenceServices(io, self.bibhandler_mock, self.filename, self.filterservice_mock)
         ref_service.add_reference_humanformat("tutkimusraportti")
 
-        self.assertEqual(io.outputs[-1], "BibTex tiedoston kirjoittaminen onnistui")
+        self.assertEqual(io.outputs[-1], "BibTex tiedoston kirjoittaminen onnistui ")
 
     def test_add_reference_humanformat_works_with_julkaisematon(self):
         io = StubIO(["avainsana", "nimi", "kirjoittaja", "1", "kommentti"])
         ref_service = ReferenceServices(io, self.bibhandler_mock, self.filename, self.filterservice_mock)
         ref_service.add_reference_humanformat("julkaisematon")
 
-        self.assertEqual(io.outputs[-1], "BibTex tiedoston kirjoittaminen onnistui")
+        self.assertEqual(io.outputs[-1], "BibTex tiedoston kirjoittaminen onnistui ")
 
     def test_list_references_returns_correct_format_book(self):
         data = Mock(entries = [{
@@ -190,37 +190,37 @@ class TestReferenceServices(unittest.TestCase):
         ref_service = ReferenceServices(io, self.bibhandler_mock, self.filename, self.filterservice_mock)
 
         ref_service.write_references([])
-        self.assertEqual(io.outputs[-1], "Viitekirjasto on tyhjä.")   
+        self.assertEqual(io.outputs[-1], "Viitekirjasto on tyhjä. ")   
 
     def test_filter_service_filterby_year_calls_right_function(self):
         io = StubIO(["2022"])
         ref_service = ReferenceServices(io, self.bibhandler_mock, self.filename, self.filterservice_mock)
         ref_service.filter_references("vuoden")
-        self.assertEqual(self.filterservice_mock.filter_by_year.call_count, 1)
+        self.assertEqual(self.filterservice_mock.filter_by.call_count, 1)
 
     def test_filter_service_filterby_author_calls_right_function(self):
         io = StubIO(["testi"])
         ref_service = ReferenceServices(io, self.bibhandler_mock, self.filename, self.filterservice_mock)
         ref_service.filter_references("tekijän")
-        self.assertEqual(self.filterservice_mock.filter_by_author.call_count, 1)
+        self.assertEqual(self.filterservice_mock.filter_by.call_count, 1)
 
     def test_filter_service_filterby_title_calls_right_function(self):
         io = StubIO(["testi"])
         ref_service = ReferenceServices(io, self.bibhandler_mock, self.filename, self.filterservice_mock)
         ref_service.filter_references("nimen")
-        self.assertEqual(self.filterservice_mock.filter_by_title.call_count, 1)
+        self.assertEqual(self.filterservice_mock.filter_by.call_count, 1)
 
     def test_filter_service_filterby_publisher_calls_right_function(self):
         io = StubIO(["testi"])
         ref_service = ReferenceServices(io, self.bibhandler_mock, self.filename, self.filterservice_mock)
         ref_service.filter_references("julkaisijan")
-        self.assertEqual(self.filterservice_mock.filter_by_publisher.call_count, 1)
+        self.assertEqual(self.filterservice_mock.filter_by.call_count, 1)
 
     def test_filter_service_filterby_entrytype_calls_right_function(self):
         io = StubIO(["testi"])
         ref_service = ReferenceServices(io, self.bibhandler_mock, self.filename, self.filterservice_mock)
         ref_service.filter_references("viitetyypin")
-        self.assertEqual(self.filterservice_mock.filter_by_entrytype.call_count, 1)
+        self.assertEqual(self.filterservice_mock.filter_by.call_count, 1)
 
     def test_filter_service_sortby_year_calls_right_function_with_correct_keyword(self):
         io = StubIO([])
@@ -257,3 +257,82 @@ class TestReferenceServices(unittest.TestCase):
         self.assertEqual(self.filterservice_mock.sort_by.call_count, 1)
         self.filterservice_mock.sort_by.assert_called_with(ANY, "title")
 
+    def test_add_to_new_file_runs_to_end(self):
+        io = StubIO(["tiedostonimi"])
+        ref_service = ReferenceServices(io, self.bibhandler_mock, self.filename, self.filterservice_mock)
+        ref_service.add_to_new_file(["kirja. 1. author. 2000. title. publisher. "])
+        self.assertEqual(io.outputs[-1], "Viitteiden kirjoittaminen uuteen tiedostoon onnistui. ")
+
+    def test_add_to_new_file_adds_multiple(self):
+        io = StubIO(["tiedostonimi"])
+        ref_service = ReferenceServices(io, self.bibhandler_mock, self.filename, self.filterservice_mock)
+        ref_service.add_to_new_file(["kirja. 1. author. 2000. title. publisher. ", 
+            "lehtiartikkeli. 2. Kirjailijat. 1999. Lehtinen. Seiska. ",
+            "gradu. 3. Taneli Tohtori. 2003. Liukkaustutkimus. Helsingin Yliopisto. ",
+            "tutkimusraportti. 4. Ahkera Tutkija. 1966. Kiinnostava Tutkimus. Nokia. ",
+            "julkaisematon. 5. Herra Karhunen. 2007. Hillopurkin muoto. Hyvää hilloa. "])
+        self.assertEqual(io.outputs[-1], "Viitteiden kirjoittaminen uuteen tiedostoon onnistui. ")
+
+    def test_add_to_new_file_wrong_file_name(self):
+        io = StubIO(["references", "tiedostonimi"])
+        ref_service = ReferenceServices(io, self.bibhandler_mock, self.filename, self.filterservice_mock)
+        ref_service.add_to_new_file(["kirja. 1. author. 2000. title. publisher. "])
+        self.assertEqual(io.outputs[-1], "Viitteiden kirjoittaminen uuteen tiedostoon onnistui. ")
+
+
+    def test_delete_reference_no_added_references(self):
+        io = StubIO([])
+        ref_service = ReferenceServices(io, self.bibhandler_mock, self.filename, self.filterservice_mock)
+        ref_service.delete_reference([])
+        self.assertEqual(io.outputs[-1], "Ei valittu poistettavia viitteitä ")
+
+    def test_delete_deletes_reference(self):
+        io = StubIO(["1", "title", "author", "2000", "publisher"])
+        ref_service = (ReferenceServices(io, self.bibhandler_mock, self.filename, self.filterservice_mock))
+        ref_service.add_reference_humanformat("kirja")
+        ref_service.delete_reference(["kirja. 1. author. 2000. title. publisher. "])
+        self.assertEqual(io.outputs[-1], "Poisto suoritettu. ")
+
+    def test_delete_deletes_reference_book(self):
+        io = StubIO(["1", "title", "author", "2000", "publisher", "1", "title", "author", "2000", "publisher"])
+        ref_service = (ReferenceServices(io, self.bibhandler_mock, self.filename, self.filterservice_mock))
+        ref_service.add_reference_humanformat("kirja")
+        ref_service.add_reference_humanformat("kirja")
+        ref_service.delete_reference(["kirja. 1. author. 2000. title. publisher. "])
+        self.assertEqual(io.outputs[-1], "Poisto suoritettu. ")
+
+    def test_delete_deletes_reference_unpublished(self):
+        io = StubIO(["1", "title", "author", "2000", "publisher", "1", "title", "author", "2000", "publisher"])
+        ref_service = (ReferenceServices(io, self.bibhandler_mock, self.filename, self.filterservice_mock))
+        ref_service.add_reference_humanformat("julkaisematon")
+        ref_service.add_reference_humanformat("kirja")
+
+        ref_service.delete_reference(["julkaisematon. 1. author. 2000. title. publisher. "])
+        self.assertEqual(io.outputs[-1], "Poisto suoritettu. ")
+
+    def test_delete_deletes_reference_mastersthesis(self):
+        io = StubIO(["1", "title", "author", "2000", "publisher", "1", "title", "author", "2000", "publisher"])
+        ref_service = (ReferenceServices(io, self.bibhandler_mock, self.filename, self.filterservice_mock))
+        ref_service.add_reference_humanformat("gradu")
+        ref_service.add_reference_humanformat("kirja")
+
+        ref_service.delete_reference(["gradu. 1. author. 2000. title. publisher. "])
+        self.assertEqual(io.outputs[-1], "Poisto suoritettu. ")
+
+    def test_delete_deletes_reference_techreport(self):
+        io = StubIO(["1", "title", "author", "2000", "publisher", "1", "title", "author", "2000", "publisher"])
+        ref_service = (ReferenceServices(io, self.bibhandler_mock, self.filename, self.filterservice_mock))
+        ref_service.add_reference_humanformat("tutkimusraportti")
+        ref_service.add_reference_humanformat("kirja")
+
+        ref_service.delete_reference(["tutkimusraportti. 1. author. 2000. title. publisher. "])
+        self.assertEqual(io.outputs[-1], "Poisto suoritettu. ")
+
+    def test_delete_deletes_reference_article(self):
+        io = StubIO(["1", "title", "author", "2000", "publisher", "1", "title", "author", "2000", "publisher"])
+        ref_service = (ReferenceServices(io, self.bibhandler_mock, self.filename, self.filterservice_mock))
+        ref_service.add_reference_humanformat("lehtiartikkeli")
+        ref_service.add_reference_humanformat("kirja")
+
+        ref_service.delete_reference(["lehtiartikkeli. 1. author. 2000. title. publisher. "])
+        self.assertEqual(io.outputs[-1], "Poisto suoritettu. ")

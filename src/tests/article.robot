@@ -8,7 +8,7 @@ Add One Article
     Add Reference  lehtiartikkeli  Matti15  Hieno artikkeli, vai onko?  Matti Meikäläinen  2015  Parasjulkaisu
     Input  poistu
     Run App
-    Output Should Contain  Lisätään Matti Meikäläinen. 2015. Hieno artikkeli, vai onko?. Parasjulkaisu.
+    Output Should Contain  Lisätään lehtiartikkeli. Matti15. Matti Meikäläinen. 2015. Hieno artikkeli, vai onko?. Parasjulkaisu. 
 
 Add Bibtex Article
     Input  lisää viite
@@ -26,4 +26,4 @@ List Article
     Input  lisäysjärjestys
     Input  poistu
     Run App
-    Output Should Contain  Matti Meikäläinen. 2016. Hienon artikkelin jatko-osa: Uusi Toivo. Parasjulkaisu.
+    Output Should Contain  lehtiartikkeli. Matti16. Matti Meikäläinen. 2016. Hienon artikkelin jatko-osa: Uusi Toivo. Parasjulkaisu. 

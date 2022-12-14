@@ -14,8 +14,8 @@ Filter By Year
     Input  2007
     Input  poistu
     Run App
-    Output Should Contain  Martin, Robert. 2007. Clean Code: A Handbook of Agile Software Craftsmanship. Prentice Hall.
-    Output Should Not Contain   Martin, Robert. 2008. Clean Code: A Handbook of Agile Software Craftsmanship. Prentice Hall.
+    Output Should Contain  kirja. Martin09. Martin, Robert. 2007. Clean Code: A Handbook of Agile Software Craftsmanship. Prentice Hall.
+    Output Should Not Contain   kirja. Martin09. Martin, Robert. 2008. Clean Code: A Handbook of Agile Software Craftsmanship. Prentice Hall.
 
 Filter By Author
     Input  lisää viite
@@ -29,8 +29,8 @@ Filter By Author
     Input  Martin, Robert
     Input  poistu
     Run App
-    Output Should Contain  Martin, Robert. 2007. Clean Code: A Handbook of Agile Software Craftsmanship. Prentice Hall.
-    Output Should Not Contain   Martin, Rober. 2008. Clean Code: A Handbook of Agile Software Craftsmanship. Prentice Hall.
+    Output Should Contain  kirja. Martin09. Martin, Robert. 2007. Clean Code: A Handbook of Agile Software Craftsmanship. Prentice Hall.
+    Output Should Not Contain   kirja. Martin09. Martin, Rober. 2008. Clean Code: A Handbook of Agile Software Craftsmanship. Prentice Hall.
 
 Filter By Publisher
     Input  lisää viite
@@ -44,8 +44,8 @@ Filter By Publisher
     Input  Prentice Hall
     Input  poistu
     Run App
-    Output Should Contain  Martin, Robert. 2007. Clean Code: A Handbook of Agile Software Craftsmanship. Prentice Hall.
-    Output Should Not Contain   Martin, Rober. 2008. Clean Code: A Handbook of Agile Software Craftsmanship. Prentice all.
+    Output Should Contain  kirja. Martin09. Martin, Robert. 2007. Clean Code: A Handbook of Agile Software Craftsmanship. Prentice Hall.
+    Output Should Not Contain   kirja. Martin09. Martin, Rober. 2008. Clean Code: A Handbook of Agile Software Craftsmanship. Prentice all.
 
 Filter By Entry Type
     Input  lisää viite
@@ -59,8 +59,8 @@ Filter By Entry Type
     Input  book
     Input  poistu
     Run App
-    Output Should Contain  Martin, Robert. 2007. Clean Code: A Handbook of Agile Software Craftsmanship. Prentice Hall.
-    Output Should Not Contain   Allan Collins and John Seely Brown and Ann Holum. 1991. Cognitive apprenticeship: making thinking visible. American Educator.
+    Output Should Contain  kirja. Martin09. Martin, Robert. 2007. Clean Code: A Handbook of Agile Software Craftsmanship. Prentice Hall.
+    Output Should Not Contain   lehtiartikeli. CBH91. Allan Collins and John Seely Brown and Ann Holum. 1991. Cognitive apprenticeship: making thinking visible. American Educator.
 
 Filter By Title
     Input  lisää viite
@@ -74,5 +74,5 @@ Filter By Title
     Input  Clean Code: A Handbook of Agile Software Craftsmanship
     Input  poistu
     Run App
-    Output Should Contain  Martin, Robert. 2007. Clean Code: A Handbook of Agile Software Craftsmanship. Prentice Hall.
-    Output Should Not Contain   Martin, Rober. 2008. Clean Code: A Handbook of Agile Software Craftsmanship. Prentice all.
+    Output Should Contain  kirja. Martin09. Martin, Robert. 2007. Clean Code: A Handbook of Agile Software Craftsmanship. Prentice Hall.
+    Output Should Not Contain   kirja. Martin09. Martin, Rober. 2008. Clean Code: A Handbook of Agile Software Craftsmanship. Prentice all.

@@ -57,3 +57,10 @@ class TestBibtexHandler(unittest.TestCase):
         read_result = self.bibHandler.read_from_bib_file(test_file.name)
         self.assertEqual(read_result.entries[0], self.data)
         unlink(test_file.name)
+
+    def test_rewrite_to_bib_file_works_humanformat(self):
+        write_mock = mock_open()
+        with patch("builtins.open", write_mock):
+            call_result = self.bibHandler.rewrite_bib_file_humanformat([self.humanbibtex_entry], write_mock)
+        self.assertEqual(call_result, True)
+        write_mock().write.assert_called()

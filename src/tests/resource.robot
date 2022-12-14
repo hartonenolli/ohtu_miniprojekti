@@ -10,4 +10,3 @@ Add Reference
     Input  ${kirjailija}
     Input  ${julkaisuvuosi}
     Input  ${julkaisija}
-

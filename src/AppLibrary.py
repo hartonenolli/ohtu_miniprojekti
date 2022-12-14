@@ -31,7 +31,7 @@ class StubIO:
         return ""
 
     def write(self, prompt):
-        self.outputs.append(prompt)
+        self.outputs.append(prompt[0:len(prompt)-1])
 
     def add_input(self, value):
         self.inputs.append(value)
@@ -48,6 +48,9 @@ class AppLibrary():
 
     def input(self, value):
         self._io.add_input(value)
+
+    def input_list(self, value):
+        self._io.add_input([value])
 
     def run_app(self):
         self._app.start_app()
