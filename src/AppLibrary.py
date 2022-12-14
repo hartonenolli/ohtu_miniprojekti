@@ -69,3 +69,6 @@ class AppLibrary():
         outputs = self._io.outputs
         if value in outputs:
             raise AssertionError(f"Output \"{value}\" is in {str(outputs)}")
+            
+    def input_empty(self, value):
+        self._io.add_input([])
