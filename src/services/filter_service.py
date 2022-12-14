@@ -5,13 +5,13 @@ class FilterService():
 
     def sort_by(self, bib_database, sort_keyword, descending=False):
         if descending:
-            bib_database.entries.sort(key= lambda x : x[sort_keyword], reverse=True)
+            bib_database.entries.sort(key= lambda reference : reference[sort_keyword], reverse=True)
             return bib_database
-        bib_database.entries.sort(key = lambda x : x[sort_keyword])
+        bib_database.entries.sort(key = lambda reference : reference[sort_keyword])
         return bib_database
 
     def filter_by(self, bib_database, filter_keyword : str, match_case):
         bib_result_database = BibDatabase()
-        bib_result_database.entries = [n for n in bib_database.entries
-        if filter_keyword in n and n[filter_keyword].find(match_case) != -1]
+        bib_result_database.entries = [reference for reference in bib_database.entries
+        if filter_keyword in reference and reference[filter_keyword] == match_case]
         return bib_result_database
