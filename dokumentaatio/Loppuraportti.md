@@ -66,4 +66,4 @@ Branchien käyttöä paremmin. Miten se oikeasti tapahtuisi. Kädestä pitäen e
 
 ## Yleistä kaikesta
 
-Ryhmämme oli paljon kipeenä joka vaikeutti läsnäolo ja ryhmäsuunnittelu sessioita. Lumikaaos vaikeutti paljon myös samaa. 
+Ryhmämme oli paljon kipeenä joka vaikeutti läsnäolo ja ryhmäsuunnittelu sessioita. Lumikaaos vaikeutti paljon myös samaa. Opittiin kommunikaation tärkeys projetia tehdessä. Meidän mielestä ryhmätyömme meni hyvin ja olemme tyytyväisiä lopputulokseen. 
