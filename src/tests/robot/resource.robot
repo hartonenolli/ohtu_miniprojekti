@@ -1,5 +1,5 @@
 *** Settings ***
-Library  ../AppLibrary.py
+Library  ../../AppLibrary.py
 
 *** Keywords ***
 Add Reference
