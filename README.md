@@ -3,6 +3,8 @@ Latex möröt ohtu miniprojekti
 [Ensimmäinen release](https://github.com/hartonenolli/ohtu_miniprojekti/releases/tag/v1.0.0)  
 
 [Toinen release](https://github.com/hartonenolli/ohtu_miniprojekti/releases/tag/v2.0.0)
+
+[Viimeinen release](https://github.com/hartonenolli/ohtu_miniprojekti/releases/tag/v2.0.1)
   
 ![GHA workflow badge](https://github.com/hartonenolli/ohtu_miniprojekti/workflows/CI/badge.svg)
 [![codecov](https://codecov.io/gh/hartonenolli/ohtu_miniprojekti/branch/main/graph/badge.svg?token=F09JGyBYmZ)](https://codecov.io/gh/hartonenolli/ohtu_miniprojekti)
