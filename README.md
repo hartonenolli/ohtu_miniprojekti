@@ -17,3 +17,4 @@ Latex möröt ohtu miniprojekti
 
 [burndown ja työmääräarviot](https://helsinkifi-my.sharepoint.com/:x:/g/personal/katakris_ad_helsinki_fi/EbP8F7BvYYBBqDhL_v3D42oBdMWc0VdeyTp1U0iYc5WA1g?e=jKhmDh)
 
+[Loppuraportti](https://github.com/hartonenolli/ohtu_miniprojekti/blob/main/dokumentaatio/Loppuraportti.md)
