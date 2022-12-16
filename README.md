@@ -13,6 +13,8 @@ Latex möröt ohtu miniprojekti
 
 [userstory](https://github.com/hartonenolli/ohtu_miniprojekti/blob/main/dokumentaatio/userstory.md)
 
+[Hyväksymisehdot](https://github.com/hartonenolli/ohtu_miniprojekti/tree/main/src/tests/robot)
+
 [definition of done](https://github.com/hartonenolli/ohtu_miniprojekti/blob/main/dokumentaatio/definition_of_done.md)
 
 [burndown ja työmääräarviot](https://helsinkifi-my.sharepoint.com/:x:/g/personal/katakris_ad_helsinki_fi/EbP8F7BvYYBBqDhL_v3D42oBdMWc0VdeyTp1U0iYc5WA1g?e=jKhmDh)
