@@ -49,8 +49,21 @@ Järkevä rakenne helpottaa huomattavan paljon ohjelman laajentamista ja testaam
 
 ### Mikä onnistui
 
+Arkkitehtuuri muutos oli todettu erinomaiseksi ja sovelluksen laajentaminen sujui mielekkäästi. Demotilaisuus oli onnistunut ja olimme ylpeitä meidän tuotteestamme. Parikoodaus ja yhdessä ongelmien ratkaisu auttoi paljon. Reference moduulin uudelleen teko oli hyvä ja saimme paljon uusia erilaisia viitteitä. Kommunikaatio jatkiu hyvällä menestyksellä.
+
 ### Mikä ei onnistunut
+
+Todella paljon taskeja sprinttiin. Jaettu hyvin mutta teki määrästä paljon. Koodin jatkuva pienten asioiden muuttaminen ja sen takia testien koko aikainen 
+muuttaminen oli huonosti suunniteltu. 
 
 ### Mitä opittiin
 
+Ohjelmisto rakenteen ollessa hyvä oli mukava laajenta ja suunnittelu palkitsee. 
+
+## Mitä olisimme halunneet oppia
+
+Branchien käyttöä paremmin. Miten se oikeasti tapahtuisi. Kädestä pitäen esimerkki. Ohjaajilta koodin rakenteesta kommenttia esimerkiksi ensimmäisen sprintin osalta. 
+
 ## Yleistä kaikesta
+
+Ryhmämme oli paljon kipeenä joka vaikeutti läsnäolo ja ryhmäsuunnittelu sessioita. Lumikaaos vaikeutti paljon myös samaa. 
