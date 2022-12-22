@@ -5,7 +5,7 @@ from bibtexparser.bparser import BibTexParser
 class BibtexHandler:
     def __init__(self):
         self._writer = BibTexWriter()
-        
+
     def _create_bibtex_format_bibtexformat(self, bibtex):
         bibparser = BibTexParser(interpolate_strings=False)
         bibtex_entry = bibparser.parse(bibtex)
