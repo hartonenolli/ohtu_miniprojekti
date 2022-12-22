@@ -4,8 +4,8 @@ from bibtexparser.bparser import BibTexParser
 
 class BibtexHandler:
     def __init__(self):
-        pass
-
+        self._writer = BibTexWriter()
+        
     def _create_bibtex_format_bibtexformat(self, bibtex):
         bibparser = BibTexParser(interpolate_strings=False)
         bibtex_entry = bibparser.parse(bibtex)
@@ -13,11 +13,10 @@ class BibtexHandler:
 
     def write_to_bib_file_bibtexformat(self, bibtex, file):
         bibtex = self._create_bibtex_format_bibtexformat(bibtex)
-        writer = BibTexWriter()
-        writer.indent = "    "
+        self._writer.indent = "    "
         try:
             with open(file, "a", encoding="utf-8") as bibfile:
-                bibfile.write(writer.write(bibtex))
+                bibfile.write(self._writer.write(bibtex))
             return True
         except PermissionError:
             return False
